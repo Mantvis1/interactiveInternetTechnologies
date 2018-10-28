@@ -1,0 +1,25 @@
+﻿@model IEnumerable<WebApplication1.Models.PlayerViewModel>
+@{
+    ViewBag.Title = "Market";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<table class="invisibleTableBorders">
+    <tr>
+        <td>Vardas</td>
+        <td>Pavarde</td>
+        <td>Kaina</td>
+        <td></td>
+    </tr>
+    @foreach (var item in Model)
+            {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Surname</td>
+            <td>@item.Cost</td>
+            <td><button>Pirkti</button></td>
+        </tr>
+    }
+
+</table>
+
+<!--onclick="location.href='<%: Url.Action("Action", "Controller") %>'"-->
