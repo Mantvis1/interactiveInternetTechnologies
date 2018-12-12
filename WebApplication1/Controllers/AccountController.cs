@@ -43,7 +43,8 @@ namespace WebApplication1.Controllers
         public ActionResult CheckLogIn(string userName, string pass)
         {
             int count = user.CanBeLogedIn(userName, pass);
-            if (count == 1)
+            return View();
+         /*   if (count == 1)
             {
                 // Create session??
                 return View("LogIn");
@@ -51,7 +52,7 @@ namespace WebApplication1.Controllers
             else
             {
                 return View("LogIn");
-            }
+            }*/
         }
     }
 }

@@ -31,10 +31,11 @@ namespace WebApplication1.DbContext
         public int CanBeLogedIn(string name, string password)
         {
             int count = 0;
+            string query = "";
             if (string.IsNullOrWhiteSpace(name) != true && string.IsNullOrWhiteSpace(password) != true)
             {
                 databaseConnection.Open();
-                string query = "select COUNT(id) from Users where Users.Name = '" + name + "' and Users.Password = '" + password + "'";
+                query = "select COUNT(id) from user where Name = '" + name + "' and Password = '" + password + "'";
                 MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
                 MySqlDataReader reader = commandDatabase.ExecuteReader();
                 if (reader.HasRows)

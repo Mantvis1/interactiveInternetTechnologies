@@ -1,17 +1,16 @@
-﻿<h2>Prisijungimas</h2>
+﻿<div>@ViewBag.Title</div>
+<h2>Prisijungimas</h2>
 <form action="/Account/CheckLogIn" method="post">
-    <fieldset>
 
         <p>
             <div>Vartotojo vardas</div>
-            <input type="text" name="user" />
+            <input type="text" name="userName" />
         </p>
         <p>
             <div>Slaptažodis</div>
             <input type="password" name="pass" />
         </p>
         <p>
-            <div class="btn">Prisijungti</div>
+            <input type="submit" value="Prisijungti" />
         </p>
-    </fieldset>
 </form>
