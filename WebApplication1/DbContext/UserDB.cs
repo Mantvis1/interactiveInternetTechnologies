@@ -12,18 +12,20 @@ namespace WebApplication1.DbContext
 
         }
 
-        public void AddNewUser(UserModel user)
+        public bool AddNewUser(UserModel user)
         {
+            bool AddedSuccessfully = false;
             if (string.IsNullOrWhiteSpace(user.UserName) != true && string.IsNullOrWhiteSpace(user.Password) != true && string.IsNullOrWhiteSpace(user.Email) != true)
             {
                 databaseConnection.Open();
                 string query = "INSERT INTO user (id, Name, Password, Email) VALUES (NULL, '"+user.UserName+"', '"+user.Password+"', '"+user.Email+"');";
                 MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
-                //commandDatabase.CommandTimeout = 60;
                 MySqlDataReader reader = commandDatabase.ExecuteReader();
-                //databaseConnection.Close();
-
+                databaseConnection.Close();
+                AddedSuccessfully = false;
             }
+
+            return AddedSuccessfully;
         }
 
        /* public int CanBeLogedIn(string name, string password)
