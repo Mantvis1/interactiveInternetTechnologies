@@ -1,1 +1,0 @@
-﻿select Players.Name,Players.Surname,PlayersResult.Points,PlayersResult.Effectivity from Players INNER JOIN PlayersResult ON Players.Id = PlayersResult.PlayerID order by PlayersResult.Effectivity desc
