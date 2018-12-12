@@ -11,7 +11,7 @@ namespace WebApplication1.Controllers
     public class PlayerManagerController : Controller
     {
         static PlayerDB PDB = new PlayerDB();
-        List<PlayerModel> players = PDB.getAllPlayers();
+        //List<PlayerModel> players = PDB.getAllPlayers();
 
         public PlayerManagerController()
         {
@@ -21,31 +21,31 @@ namespace WebApplication1.Controllers
         private List<int> getListOfCosts()
         {
             List<int> costs = new List<int>();
-            for (int i = 0; i < players.Count; i++)
-            {
+            /*   for (int i = 0; i < players.Count; i++)
+               {
 
-                costs.Add(Convert.ToInt32(Effectivity(players[i]) * 500));
-            }
+                   costs.Add(Convert.ToInt32(Effectivity(players[i]) * 500));
+               }*/
             return costs;
         }
 
         private double Effectivity(PlayerModel P)
         {
-            double sum = 0;
-            int count = 0;
-            for (int i = 0; i < players.Count; i++)
+            double sum = 1;
+            int count = 1;
+            /*for (int i = 0; i < players.Count; i++)
             {
                 if (P.Name == players[i].Name && P.Surname == players[i].Surname)
                 {
                     sum += players[i].Eff;
                     count++;
                 }
-            }
+            }*/
             return sum / count;
         }
-        public List<PlayerViewModel> getUpdatedListOfPlayers()
+        public void getUpdatedListOfPlayers()
         {
-            List<int> costs = getListOfCosts();
+           /* List<int> costs = getListOfCosts();
             List<PlayerViewModel> updatedListOfPlayers = new List<PlayerViewModel>();
             for (int i = 0; i < costs.Count; i++)
             {
@@ -56,7 +56,7 @@ namespace WebApplication1.Controllers
             {
                 addNewPlayerIfItDoesntExist(updatedListOfPlayers[i], result);
             }
-            return result;
+            return result;*/
         }
         private void addNewPlayerIfItDoesntExist(PlayerViewModel playerViewModel, List<PlayerViewModel> result)
         {

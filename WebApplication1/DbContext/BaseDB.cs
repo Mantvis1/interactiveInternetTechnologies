@@ -1,10 +1,10 @@
-﻿using System.Data.SqlClient;
+﻿using MySql.Data.MySqlClient;
 
 namespace WebApplication1.DbContext
 {
     public class BaseDB
     {
-        public const string connetionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Mantvydas\Desktop\KTU\5 semestras\Interaktyvios interneto technologijos\Project\WebApplication1\App_Data\basketballProjectDatabase.mdf;Integrated Security=True";
-        public SqlConnection cnn = new SqlConnection(connetionString);
+        public const string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=interactiveTechnologiesDatabase";
+       public MySqlConnection databaseConnection = new MySqlConnection(connectionString);
     }
 }

@@ -14,8 +14,8 @@ namespace WebApplication1.Controllers
         {
             PlayerManagerController PC = new PlayerManagerController();
             ViewBag.Message = "Players buy/sell page";
-            List<PlayerViewModel> players = PC.getUpdatedListOfPlayers();
-            return View(players);
+           // List<PlayerViewModel> players = PC.getUpdatedListOfPlayers();
+            return View();
         }
     }
 }

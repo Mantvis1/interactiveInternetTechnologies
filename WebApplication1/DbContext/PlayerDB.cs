@@ -14,7 +14,7 @@ namespace WebApplication1.DbContext
 
         }
 
-        public List<PlayerModel> getAllPlayers()
+      /*  public List<PlayerModel> getAllPlayers()
         {
             List<PlayerModel> listOfObjects = new List<PlayerModel>();
             string query = "select Players.Name,Players.Surname,PlayersResult.Points,PlayersResult.Effectivity from Players INNER JOIN PlayersResult ON Players.Id = PlayersResult.PlayerID order by PlayersResult.Effectivity desc";
@@ -33,6 +33,6 @@ namespace WebApplication1.DbContext
                 return listOfObjects;
             }
 
-        }
+        }*/
     }
 }
