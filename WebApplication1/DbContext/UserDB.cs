@@ -18,32 +18,35 @@ namespace WebApplication1.DbContext
             if (string.IsNullOrWhiteSpace(user.UserName) != true && string.IsNullOrWhiteSpace(user.Password) != true && string.IsNullOrWhiteSpace(user.Email) != true)
             {
                 databaseConnection.Open();
-                string query = "INSERT INTO user (id, Name, Password, Email) VALUES (NULL, '"+user.UserName+"', '"+user.Password+"', '"+user.Email+"');";
+                string query = "INSERT INTO user (id, Name, Password, Email) VALUES (NULL, '" + user.UserName + "', '" + user.Password + "', '" + user.Email + "');";
                 MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
                 MySqlDataReader reader = commandDatabase.ExecuteReader();
                 databaseConnection.Close();
-                AddedSuccessfully = false;
+                AddedSuccessfully = true;
             }
 
             return AddedSuccessfully;
         }
 
-       /* public int CanBeLogedIn(string name, string password)
+        public int CanBeLogedIn(string name, string password)
         {
             int count = 0;
-            string query = "select COUNT(id) from Users where Users.Name = '" + name + "' and Users.Password = '" + password + "'";
-            SqlDataAdapter adapter = new SqlDataAdapter();
-
             if (string.IsNullOrWhiteSpace(name) != true && string.IsNullOrWhiteSpace(password) != true)
             {
-                cnn.Open();
-                DataSet ds = new DataSet();
-                SqlCommand cmd = new SqlCommand(query, cnn);
-                adapter.SelectCommand = cmd;
-                count = adapter.Fill(ds);
-                cnn.Close();
+                databaseConnection.Open();
+                string query = "select COUNT(id) from Users where Users.Name = '" + name + "' and Users.Password = '" + password + "'";
+                MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+                MySqlDataReader reader = commandDatabase.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        count = int.Parse(reader.GetString(0));
+                    }
+                }
+                databaseConnection.Close();
             }
             return count;
-        }*/
+        }
     }
 }

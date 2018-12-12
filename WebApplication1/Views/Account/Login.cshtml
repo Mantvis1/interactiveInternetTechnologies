@@ -1,21 +1,17 @@
-﻿
-@{
-    ViewBag.Title = "Log in";
-}
-
-<h2>@ViewBag.E</h2>
-<h2>Prisijungimas</h2>
-<form method="post">
+﻿<h2>Prisijungimas</h2>
+<form action="/Account/CheckLogIn" method="post">
     <fieldset>
 
         <p>
-
+            <div>Vartotojo vardas</div>
+            <input type="text" name="user" />
         </p>
         <p>
-
+            <div>Slaptažodis</div>
+            <input type="password" name="pass" />
         </p>
         <p>
-            <a hreaf="" class="btn">Prisijungti</a>
+            <div class="btn">Prisijungti</div>
         </p>
     </fieldset>
 </form>

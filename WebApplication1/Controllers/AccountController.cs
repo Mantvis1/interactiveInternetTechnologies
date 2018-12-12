@@ -40,14 +40,18 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public ActionResult CheckLogIn(string username, string password)
+        public ActionResult CheckLogIn(string userName, string pass)
         {
-            /*  int count = user.CanBeLogedIn(username, password);
-              if (count == 1)
-              {
-                  return View("LogIn");
-              }*/
-            return View();
+            int count = user.CanBeLogedIn(userName, pass);
+            if (count == 1)
+            {
+                // Create session??
+                return View("LogIn");
+            }
+            else
+            {
+                return View("LogIn");
+            }
         }
     }
 }
