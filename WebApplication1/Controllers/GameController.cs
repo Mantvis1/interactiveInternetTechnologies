@@ -6,10 +6,14 @@ using System.Web.Mvc;
 
 namespace WebApplication1.Controllers
 {
-    public class GameSelectionController : Controller
+    public class GameController : Controller
     {
-        // GET: GameSelection
-        public ActionResult Game()
+        public ActionResult GameSelection()
+        {
+            return View();
+        }
+
+        public ActionResult MyTeam()
         {
             return View();
         }

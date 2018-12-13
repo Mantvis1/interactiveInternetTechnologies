@@ -20,7 +20,7 @@ namespace WebApplication1.DbContext
             if (string.IsNullOrWhiteSpace(user.UserName) != true && string.IsNullOrWhiteSpace(user.Password) != true && string.IsNullOrWhiteSpace(user.Email) != true)
             {
                 databaseConnection.Open();
-                query = "SELECT COUNT(id) FROM user WHERE Name = '"+user.UserName+"'";
+                query = "SELECT COUNT(id) FROM user WHERE Name = '" + user.UserName + "'";
                 MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
                 MySqlDataReader reader = commandDatabase.ExecuteReader();
                 if (reader.HasRows)
