@@ -45,18 +45,18 @@ namespace WebApplication1.Controllers
         }
         public void getUpdatedListOfPlayers()
         {
-           /* List<int> costs = getListOfCosts();
-            List<PlayerViewModel> updatedListOfPlayers = new List<PlayerViewModel>();
-            for (int i = 0; i < costs.Count; i++)
-            {
-                updatedListOfPlayers.Add(new PlayerViewModel(costs[i], players[i].Name, players[i].Surname, players[i].Points, players[i].Eff));
-            }
-            var result = new List<PlayerViewModel>();
-            for (int i = 0; i < updatedListOfPlayers.Count; i++)
-            {
-                addNewPlayerIfItDoesntExist(updatedListOfPlayers[i], result);
-            }
-            return result;*/
+            /* List<int> costs = getListOfCosts();
+             List<PlayerViewModel> updatedListOfPlayers = new List<PlayerViewModel>();
+             for (int i = 0; i < costs.Count; i++)
+             {
+                 updatedListOfPlayers.Add(new PlayerViewModel(costs[i], players[i].Name, players[i].Surname, players[i].Points, players[i].Eff));
+             }
+             var result = new List<PlayerViewModel>();
+             for (int i = 0; i < updatedListOfPlayers.Count; i++)
+             {
+                 addNewPlayerIfItDoesntExist(updatedListOfPlayers[i], result);
+             }
+             return result;*/
         }
         private void addNewPlayerIfItDoesntExist(PlayerViewModel playerViewModel, List<PlayerViewModel> result)
         {

@@ -23,11 +23,11 @@ textarea {
     max-width: 280px;
 }
 
-.invisibleTableBorders{
-    border:0px solid transparent;
+.invisibleTableBorders {
+    border: 0px solid transparent;
 }
 
 /*reikia kad th 30 procentu butu, sitas neveikia*/
-.setWidth th{
-    width:30%;
+.setWidth th {
+    width: 30%;
 }
