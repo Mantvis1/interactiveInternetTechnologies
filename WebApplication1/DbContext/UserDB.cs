@@ -15,15 +15,32 @@ namespace WebApplication1.DbContext
 
         public bool AddNewUser(UserModel user)
         {
+            int count = 0;
             bool AddedSuccessfully = false;
             if (string.IsNullOrWhiteSpace(user.UserName) != true && string.IsNullOrWhiteSpace(user.Password) != true && string.IsNullOrWhiteSpace(user.Email) != true)
             {
                 databaseConnection.Open();
-                query = "INSERT INTO user (id, Name, Password, Email) VALUES (NULL, '" + user.UserName + "', '" + user.Password + "', '" + user.Email + "');";
+                query = "SELECT COUNT(id) FROM user WHERE Name = '"+user.UserName+"'";
                 MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
                 MySqlDataReader reader = commandDatabase.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        count = int.Parse(reader.GetString(0));
+                    }
+                }
                 databaseConnection.Close();
-                AddedSuccessfully = true;
+                if (count == 0)
+                {
+                    databaseConnection.Open();
+                    query = "INSERT INTO user (id, Name, Password, Email) VALUES (NULL, '" + user.UserName + "', '" + user.Password + "', '" + user.Email + "');";
+                    commandDatabase = new MySqlCommand(query, databaseConnection);
+
+                    reader = commandDatabase.ExecuteReader();
+                    databaseConnection.Close();
+                    AddedSuccessfully = true;
+                }
             }
 
             return AddedSuccessfully;
