@@ -254,6 +254,7 @@
     <Content Include="Views\Players\Random.cshtml" />
     <Content Include="Views\Players\Market.cshtml" />
     <Content Include="Views\Game\GameSelection.cshtml" />
+    <Content Include="Views\Shared\_LayoutAfterLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

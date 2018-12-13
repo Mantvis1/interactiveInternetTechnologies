@@ -48,18 +48,25 @@ namespace WebApplication1.Controllers
                 int id = user.getUserId(userName, pass);
                 if (id != 0)
                 {
-                    Session["id"] = id; // get user id
+                    Session["id"] = id;
                     Session["name"] = userName;
+                    return RedirectToAction("Market", "Players");
                 } else
                 {
+                    return View("LogIn");
                     //Error, id not found
                 }
-                return View("LogIn");
             }
             else
             {
                 return View("LogIn");
             }
+        }
+
+        public ActionResult LogOff()
+        {
+            Session.Clear();
+            return RedirectToAction("About", "Home");
         }
     }
 }
