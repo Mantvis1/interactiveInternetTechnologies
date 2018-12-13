@@ -43,16 +43,23 @@ namespace WebApplication1.Controllers
         public ActionResult CheckLogIn(string userName, string pass)
         {
             int count = user.CanBeLogedIn(userName, pass);
-            return View();
-         /*   if (count == 1)
+            if (count == 1)
             {
-                // Create session??
+                int id = user.getUserId(userName, pass);
+                if (id != 0)
+                {
+                    Session["id"] = id; // get user id
+                    Session["name"] = userName;
+                } else
+                {
+                    //Error, id not found
+                }
                 return View("LogIn");
             }
             else
             {
                 return View("LogIn");
-            }*/
+            }
         }
     }
 }

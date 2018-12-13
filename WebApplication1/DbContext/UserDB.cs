@@ -7,6 +7,7 @@ namespace WebApplication1.DbContext
 {
     public class UserDB : BaseDB
     {
+        string query = "";
         public UserDB()
         {
 
@@ -18,7 +19,7 @@ namespace WebApplication1.DbContext
             if (string.IsNullOrWhiteSpace(user.UserName) != true && string.IsNullOrWhiteSpace(user.Password) != true && string.IsNullOrWhiteSpace(user.Email) != true)
             {
                 databaseConnection.Open();
-                string query = "INSERT INTO user (id, Name, Password, Email) VALUES (NULL, '" + user.UserName + "', '" + user.Password + "', '" + user.Email + "');";
+                query = "INSERT INTO user (id, Name, Password, Email) VALUES (NULL, '" + user.UserName + "', '" + user.Password + "', '" + user.Email + "');";
                 MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
                 MySqlDataReader reader = commandDatabase.ExecuteReader();
                 databaseConnection.Close();
@@ -31,7 +32,6 @@ namespace WebApplication1.DbContext
         public int CanBeLogedIn(string name, string password)
         {
             int count = 0;
-            string query = "";
             if (string.IsNullOrWhiteSpace(name) != true && string.IsNullOrWhiteSpace(password) != true)
             {
                 databaseConnection.Open();
@@ -48,6 +48,28 @@ namespace WebApplication1.DbContext
                 databaseConnection.Close();
             }
             return count;
+        }
+
+        public int getUserId(string name, string pass)
+        {
+            int id = 0;
+            if (string.IsNullOrWhiteSpace(name) != true && string.IsNullOrWhiteSpace(pass) != true)
+            {
+                databaseConnection.Open();
+                query = "select id from user where Name = '" + name + "' and Password = '" + pass + "'";
+                MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+                MySqlDataReader reader = commandDatabase.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        id = int.Parse(reader.GetString(0));
+                    }
+                }
+                databaseConnection.Close();
+            }
+
+            return id;
         }
     }
 }
