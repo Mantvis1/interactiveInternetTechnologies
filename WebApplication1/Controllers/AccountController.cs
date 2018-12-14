@@ -7,6 +7,7 @@ namespace WebApplication1.Controllers
     public class AccountController : Controller
     {
         UserDB user = new UserDB();
+        GameDB game = new GameDB();
         string message = "";
 
         [HttpGet]
@@ -25,9 +26,12 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult RegistrationForm(string userName, string pass, string email)
         {
-            bool isAdded = user.AddNewUser(new UserModel(userName, pass, email));
+            UserModel newUser = new UserModel(userName, pass, email);
+            bool isAdded = user.AddNewUser(newUser);
+            int id = user.getUserId(userName, pass);
             if (isAdded == true)
             {
+                game.CreateRankingForUser(id);
                 message = "Sėkmingai sukurtas naujas vartotojas";
                 return RedirectToAction("LogIn");
             }

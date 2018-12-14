@@ -52,7 +52,7 @@ namespace WebApplication1.DbContext
         private int isUserExist(int userId)
         {
             int count = 0;
-            databaseConnection.Open(); ;
+            databaseConnection.Open();
             query = "SELECT COUNT(`userId`) FROM `tournament` WHERE userId = " + userId;
             MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
             MySqlDataReader reader = commandDatabase.ExecuteReader();
@@ -65,6 +65,15 @@ namespace WebApplication1.DbContext
             }
             databaseConnection.Close();
             return count;
+        }
+
+        public void CreateRankingForUser(int userId)
+        {
+            databaseConnection.Open();
+            query = "INSERT INTO rankings (id, userId, win, loose, value) VALUES(NULL, "+userId+", 0, 0, 0)";
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            MySqlDataReader reader = commandDatabase.ExecuteReader();
+            databaseConnection.Close();
         }
     }
 }
