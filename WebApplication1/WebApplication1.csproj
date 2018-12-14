@@ -201,6 +201,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
     <Compile Include="DbContext\BaseDB.cs" />
+    <Compile Include="DbContext\GameDB.cs" />
     <Compile Include="DbContext\PlayerDB.cs" />
     <Compile Include="DbContext\UserDB.cs" />
     <Compile Include="Global.asax.cs">
@@ -260,8 +261,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Constants\" />
-    <Folder Include="Views\Acount\" />
-    <Folder Include="Views\GameSelection\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
