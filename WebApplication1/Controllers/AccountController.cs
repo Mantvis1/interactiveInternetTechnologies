@@ -8,13 +8,14 @@ namespace WebApplication1.Controllers
     {
         UserDB user = new UserDB();
         GameDB game = new GameDB();
-        string message = "";
+        private string message = "";
 
         [HttpGet]
         public ActionResult Register()
         {
-            ViewBag.ErrorMessage = "ErrorMessage";
-            return View(message);
+            ViewBag.ErrorMessage = Session["error"];
+            Session["error"] = null;
+            return View();
         }
 
         [HttpGet]
@@ -28,19 +29,18 @@ namespace WebApplication1.Controllers
         {
             UserModel newUser = new UserModel(userName, pass, email);
             bool isAdded = user.AddNewUser(newUser);
-            int id = user.getUserId(userName, pass);
             if (isAdded == true)
             {
+                int id = user.getUserId(userName, pass);
                 game.CreateRankingForUser(id);
                 message = "Sėkmingai sukurtas naujas vartotojas";
                 return RedirectToAction("LogIn");
             }
             else
             {
-                message = "Vartotojo sukurti nepavyko, bandykite dar kartą!";
-                RedirectToAction("Register");
+                Session["error"] = "Vartotojas tokiu vardu jau yra";
+               return RedirectToAction("Register");
             }
-            return RedirectToAction("Register");
         }
 
         [HttpPost]
