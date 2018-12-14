@@ -4,12 +4,15 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.DbContext;
+using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
     public class GameController : Controller
     {
         GameDB game = new GameDB();
+        RankingDB ranking = new RankingDB();
+
         [HttpGet]
         public ActionResult GameSelection()
         {
@@ -40,7 +43,8 @@ namespace WebApplication1.Controllers
 
         public ActionResult Ranking()
         {
-            return View();
+            List<RankingModel> listOfRanks = ranking.getAllRankings(1, 2);
+            return View(listOfRanks);
         }
     }
 }

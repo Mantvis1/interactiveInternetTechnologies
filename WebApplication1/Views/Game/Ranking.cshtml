@@ -1,8 +1,30 @@
-﻿
+﻿@model IEnumerable<WebApplication1.Models.RankingModel>
 @{
     ViewBag.Title = "Ranking";
     Layout = "~/Views/Shared/_LayoutAfterLogin.cshtml";
+    int rank = 1;
 }
 
-<h2>Ranking</h2>
+<h2>Žadiėjų reitingai</h2>
+<table class="invisibleTableBorders">
+    <tr>
+        <th>Retingas</th>
+        <th>Vardas</th>
+        <th>Pergales</th>
+        <th>Pralaimėjimai</th>
+        <th>Viso rungtynės</th>
+        <th>Komandos vertė</th>
+    </tr>
+    @foreach (var player in Model)
+    {
+        <tr>
+            <td>@rank</td>
+            <td>@player.Name</td>
+            <td>@player.Win</td>
+            <td>@player.Lose</td>
+            <td>@player.AllGames()</td>
+            <td>@player.Value</td>
+        </tr>
+    }
 
+</table>

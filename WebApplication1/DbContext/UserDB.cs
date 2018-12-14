@@ -88,5 +88,26 @@ namespace WebApplication1.DbContext
 
             return id;
         }
+
+        public string getNameById(int userId)
+        {
+            string name = "";
+            if(userId >= 0)
+            {
+                databaseConnection.Open();
+                query = "SELECT name  FROM user WHERE id ="+userId;
+                MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+                MySqlDataReader reader = commandDatabase.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        name = reader.GetString(0);
+                    }
+                }
+                databaseConnection.Close();
+            }
+            return name;
+        }
     }
 }
