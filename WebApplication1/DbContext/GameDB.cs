@@ -35,7 +35,7 @@ namespace WebApplication1.DbContext
         public bool CreateNewCompetotor(int userId)
         {
             int isExist = isUserExist(userId);
-            if(isExist == 0)
+            if (isExist == 0)
             {
                 databaseConnection.Open();
                 query = "INSERT INTO tournament(id, userId) VALUES (NULL," + userId + ")";
@@ -43,7 +43,8 @@ namespace WebApplication1.DbContext
                 MySqlDataReader reader = commandDatabase.ExecuteReader();
                 databaseConnection.Close();
                 return true;
-            } else
+            }
+            else
             {
                 return false;
             }
@@ -60,7 +61,7 @@ namespace WebApplication1.DbContext
             {
                 while (reader.Read())
                 {
-                   count = int.Parse(reader.GetString(0));
+                    count = int.Parse(reader.GetString(0));
                 }
             }
             databaseConnection.Close();
@@ -70,7 +71,7 @@ namespace WebApplication1.DbContext
         public void CreateRankingForUser(int userId)
         {
             databaseConnection.Open();
-            query = "INSERT INTO rankings (id, userId, win, loose, value) VALUES(NULL, "+userId+", 0, 0, 0)";
+            query = "INSERT INTO rankings (id, userId, win, loose, value) VALUES(NULL, " + userId + ", 0, 0, 0)";
             MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
             MySqlDataReader reader = commandDatabase.ExecuteReader();
             databaseConnection.Close();

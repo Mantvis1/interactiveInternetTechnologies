@@ -37,5 +37,10 @@ namespace WebApplication1.Controllers
                 return RedirectToAction("GameSelection"); // Error message
             }
         }
+
+        public ActionResult Ranking()
+        {
+            return View();
+        }
     }
 }

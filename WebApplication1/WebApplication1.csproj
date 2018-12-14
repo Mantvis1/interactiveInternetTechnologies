@@ -257,6 +257,7 @@
     <Content Include="Views\Game\GameSelection.cshtml" />
     <Content Include="Views\Shared\_LayoutAfterLogin.cshtml" />
     <Content Include="Views\Game\MyTeam.cshtml" />
+    <Content Include="Views\Game\Ranking.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
