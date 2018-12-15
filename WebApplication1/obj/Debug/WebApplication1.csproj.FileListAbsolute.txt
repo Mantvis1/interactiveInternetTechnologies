@@ -164,4 +164,3 @@ C:\Users\Mantvydas\Desktop\KTU\5 semestras\Interaktyvios interneto technologijos
 C:\Users\Mantvydas\Desktop\KTU\5 semestras\Interaktyvios interneto technologijos\Project\WebApplication1\bin\MySql.Data.dll
 C:\Users\Mantvydas\Desktop\KTU\5 semestras\Interaktyvios interneto technologijos\Project\WebApplication1\bin\Google.Protobuf.dll
 C:\Users\Mantvydas\Desktop\KTU\5 semestras\Interaktyvios interneto technologijos\Project\WebApplication1\bin\MySql.Data.xml
-C:\Users\Mantvydas\Desktop\KTU\5 semestras\Interaktyvios interneto technologijos\Project\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache

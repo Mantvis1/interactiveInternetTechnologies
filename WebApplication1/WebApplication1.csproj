@@ -210,7 +210,6 @@
     </Compile>
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\PlayerModel.cs" />
-    <Compile Include="Models\PlayerViewModel.cs" />
     <Compile Include="Models\RankingModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

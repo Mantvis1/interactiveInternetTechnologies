@@ -10,7 +10,7 @@ namespace WebApplication1.Controllers
 {
     public class HomeController : Controller
     {
-
+        PlayerDB player = new PlayerDB();
         public ActionResult Index()
         {
             return View();

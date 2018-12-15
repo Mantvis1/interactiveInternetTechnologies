@@ -58,7 +58,7 @@ namespace WebApplication1.Controllers
              }
              return result;*/
         }
-        private void addNewPlayerIfItDoesntExist(PlayerViewModel playerViewModel, List<PlayerViewModel> result)
+      /*  private void addNewPlayerIfItDoesntExist(PlayerViewModel playerViewModel, List<PlayerViewModel> result)
         {
             bool isFound = false;
             for (int i = 0; i < result.Count; i++)
@@ -72,7 +72,7 @@ namespace WebApplication1.Controllers
             {
                 result.Add(playerViewModel);
             }
-        }
+        }*/
     }
 }
 

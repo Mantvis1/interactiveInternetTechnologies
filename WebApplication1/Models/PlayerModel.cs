@@ -7,18 +7,11 @@ namespace WebApplication1.Models
 {
     public class PlayerModel : BaseModel
     {
-        
         public string Name { get; set; }
-        public string Surname { get; set; }
-        public int Points { get; set; }
-        public double Eff { get; set; }
 
-        public PlayerModel(string name, string surname, int points, double eff) : base()
+        public PlayerModel(int id, string name) : base(id)
         {
             Name = name;
-            Surname = surname;
-            Points = points;
-            Eff = eff;
         }
     }
 }

@@ -21,7 +21,9 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult LogIn()
         {
-            return View(message);
+            ViewBag.ErrorMessage = Session["error"];
+            Session["error"] = null;
+            return View();
         }
 
         [HttpPost]
@@ -56,16 +58,13 @@ namespace WebApplication1.Controllers
                     Session["name"] = userName;
                     return RedirectToAction("MyTeam", "Game");
                 }
-                else
-                {
-                    return View("LogIn");
-                    //Error, id not found
-                }
             }
             else
             {
+                Session["error"] = "Tokio vartotojo nėra.";
                 return View("LogIn");
             }
+            return View();
         }
 
         public ActionResult LogOff()

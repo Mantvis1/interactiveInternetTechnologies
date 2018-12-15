@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -8,31 +9,29 @@ using WebApplication1.Models;
 namespace WebApplication1.DbContext
 {
     public class PlayerDB : BaseDB
-    {   
+    {
+        string query = "";
         public PlayerDB()
         {
 
         }
 
-      /*  public List<PlayerModel> getAllPlayers()
+        public List<PlayerModel> getAllPlayers()
         {
-            List<PlayerModel> listOfObjects = new List<PlayerModel>();
-            string query = "select Players.Name,Players.Surname,PlayersResult.Points,PlayersResult.Effectivity from Players INNER JOIN PlayersResult ON Players.Id = PlayersResult.PlayerID order by PlayersResult.Effectivity desc";
-            using (SqlCommand command = new SqlCommand(query, cnn))
+            List<PlayerModel> players = new List<PlayerModel>();
+            nbaDatabaseConnection.Open();
+            query = "SELECT * FROM Player";
+            MySqlCommand commandDatabase = new MySqlCommand(query, nbaDatabaseConnection);
+            MySqlDataReader reader = commandDatabase.ExecuteReader();
+            if (reader.HasRows)
             {
-                cnn.Open();
-                using (SqlDataReader reader = command.ExecuteReader())
+                while (reader.Read())
                 {
-                    while (reader.Read())
-                    {
-                        PlayerModel P = new PlayerModel(reader["Name"].ToString(), reader["Surname"].ToString(), Convert.ToInt32(reader["Points"]), Convert.ToDouble(reader["Effectivity"]));
-                        listOfObjects.Add(P);
-                    }
-                    cnn.Close();
+                    players.Add(new PlayerModel(reader.GetInt32(0),reader.GetString(1)));
                 }
-                return listOfObjects;
             }
-
-        }*/
+            nbaDatabaseConnection.Close();
+            return players;
+        }
     }
 }
