@@ -92,10 +92,10 @@ namespace WebApplication1.DbContext
         public string getNameById(int userId)
         {
             string name = "";
-            if(userId >= 0)
+            if (userId >= 0)
             {
                 databaseConnection.Open();
-                query = "SELECT name  FROM user WHERE id ="+userId;
+                query = "SELECT name  FROM user WHERE id =" + userId;
                 MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
                 MySqlDataReader reader = commandDatabase.ExecuteReader();
                 if (reader.HasRows)

@@ -20,11 +20,11 @@ namespace WebApplication1.DbContext
         public List<RankingModel> getAllRankings(int start, int end)
         {
             List<RankingModel> rankings = new List<RankingModel>();
-            
-            if(end > 0 && start >= 0 && end > start)
+
+            if (end > 0 && start >= 0 && end > start)
             {
                 databaseConnection.Open();
-                query = "SELECT * FROM rankings LImit "+start+","+(end-start)+";";
+                query = "SELECT * FROM rankings LImit " + start + "," + (end - start) + ";";
                 MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
                 MySqlDataReader reader = commandDatabase.ExecuteReader();
                 if (reader.HasRows)

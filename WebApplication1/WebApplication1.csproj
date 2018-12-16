@@ -209,6 +209,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\EffModel.cs" />
     <Compile Include="Models\PlayerModel.cs" />
     <Compile Include="Models\RankingModel.cs" />
     <Compile Include="Models\UserModel.cs" />

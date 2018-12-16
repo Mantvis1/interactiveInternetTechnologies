@@ -13,7 +13,7 @@ namespace WebApplication1.Controllers
         PlayerDB player = new PlayerDB();
         public ActionResult Index()
         {
-            UpdateExistingDatabase();
+         //   UpdateExistingDatabase();
             return View();
         }
 
@@ -26,13 +26,29 @@ namespace WebApplication1.Controllers
 
         private void UpdateExistingDatabase()
         {
+            List<EffModel> eff = new List<EffModel>();
             List<PlayerModel> players = player.getAllPlayers();
-            bool cleared = player.clearAllPlayerTable();
-            if(cleared == true)
+            bool clearedInfoTable = player.clearAllEffTable();
+            /*  bool cleared = player.clearAllPlayerTable();
+              if(cleared == true)
+              {
+                  foreach (var onePlayer in players)
+                  {
+                     player.addPlayer(onePlayer);
+                  }
+
+              }
+              */
+            foreach (var item in players)
             {
-                foreach (var onePlayer in players)
+                eff.Add(player.getEff(item.ID));
+            }
+
+            if (clearedInfoTable == true)
+            {
+                foreach (var onePlayer in eff)
                 {
-                   player.addPlayer(onePlayer);
+                    player.addPlayerInfo(onePlayer);
                 }
             }
         }
