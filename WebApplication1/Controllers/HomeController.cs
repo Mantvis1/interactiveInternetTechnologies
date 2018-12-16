@@ -13,6 +13,7 @@ namespace WebApplication1.Controllers
         PlayerDB player = new PlayerDB();
         public ActionResult Index()
         {
+            UpdateExistingDatabase();
             return View();
         }
 
@@ -21,6 +22,19 @@ namespace WebApplication1.Controllers
             ViewBag.Message = "Your application description page.";
 
             return View();
+        }
+
+        private void UpdateExistingDatabase()
+        {
+            List<PlayerModel> players = player.getAllPlayers();
+            bool cleared = player.clearAllPlayerTable();
+            if(cleared == true)
+            {
+                foreach (var onePlayer in players)
+                {
+                   player.addPlayer(onePlayer);
+                }
+            }
         }
     }
 }
