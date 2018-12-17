@@ -3,23 +3,23 @@
     ViewBag.Title = "Market";
     Layout = "~/Views/Shared/_LayoutAfterLogin.cshtml";
 }
-<table class="invisibleTableBorders">
-    <tr>
-        <th>Vardas Pavarde</th>
-        <th>Kaina</th>
-        <th>ID</th>
-        <th>Pirkti</th>
-    </tr>
-    @foreach (var player in Model)
-    {
+<form action="/Players/AddPlayer" method="POST">
+    <table class="invisibleTableBorders">
         <tr>
-            <td>@player.Name</td>
-            <td>@player.getCost()</td>
-            <td>@player.ID</td>
-            <td><button class="btn-outline-success">Pirkti</button></td>
+            <th>Vardas Pavarde</th>
+            <th>Kaina</th>
+            <th class="hidden">ID</th>
+            <th>Pirkti</th>
         </tr>
-    }
+        @foreach (var player in Model)
+        {
+            <tr>
+                <td>@player.Name</td>
+                <td>@player.getCost()</td>
+                <td class="hidden"><input type="text" name="playerId" value="@player.ID" readonly /></td>
+                <td><button type="submit" class="btn-outline-success">Pirkti</button></td>
+            </tr>
+        }
 
-</table>
-
-<!--onclick="location.href='<%: Url.Action("Action", "Controller") %>'"-->
+    </table>
+</form>

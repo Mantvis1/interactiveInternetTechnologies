@@ -109,5 +109,14 @@ namespace WebApplication1.DbContext
             }
             return name;
         }
+
+        public void insertPlayerToUser(int userId, int playerId)
+        {
+            databaseConnection.Open();
+            query = "INSERT INTO userplayer (id, userId, playerId) VALUES (NULL," + userId + "," + playerId + ")";
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            MySqlDataReader reader = commandDatabase.ExecuteReader();
+            databaseConnection.Close();
+        }
     }
 }
