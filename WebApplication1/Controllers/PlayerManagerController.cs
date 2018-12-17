@@ -11,7 +11,7 @@ namespace WebApplication1.Controllers
     public class PlayerManagerController : Controller
     {
         static PlayerDB PDB = new PlayerDB();
-        //List<PlayerModel> players = PDB.getAllPlayers();
+
 
         public PlayerManagerController()
         {
@@ -21,6 +21,19 @@ namespace WebApplication1.Controllers
         public int playerEff(int pts, int reb, int ast, int stl, int blk, int missedFG, int missedFT, int to)
         {
             return pts + reb + ast + blk - missedFG - missedFT - to;
+        }
+
+        public List<PlayerViewModel> getUpdatedListOfPlayers()
+        {
+            List<PlayerModel> players = PDB.getAllPlayers();
+            List<PlayerViewModel> updatedList = new List<PlayerViewModel>();
+            EffModel efectivity = new EffModel();
+            for (int i = 0; i < 10; i++)
+            {
+                efectivity = PDB.getEff(players[i].ID);
+                updatedList.Add(new PlayerViewModel(players[i].ID, players[i].Name, efectivity.pts, efectivity.eff));
+            }
+            return updatedList;
         }
     }
 }

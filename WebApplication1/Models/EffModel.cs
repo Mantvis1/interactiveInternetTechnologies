@@ -7,10 +7,10 @@ namespace WebApplication1.Models
 {
     public class EffModel :BaseModel
     {
-        public int pts;
-        public int eff;
+        public double pts;
+        public double eff;
 
-        public EffModel(int pts, int eff) : base()
+        public EffModel(double pts, double eff) : base()
         {
             this.pts = pts;
             this.eff = eff;

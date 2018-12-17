@@ -65,19 +65,23 @@ namespace WebApplication1.DbContext
             if (id > -1)
             {
                 EffModel ef = new EffModel();
+                int limit = 5;
                 nbaDatabaseConnection.Open();
-                query = "SELECT * FROM Actions WHERE PlayerId =" + id + " ORDER by PlayerId DESC LIMIT 5";
+                query = "SELECT * FROM Actions WHERE PlayerId =" + id + " ORDER by PlayerId DESC LIMIT " + limit;
                 MySqlCommand commandDatabase = new MySqlCommand(query, nbaDatabaseConnection);
                 MySqlDataReader reader = commandDatabase.ExecuteReader();
                 if (reader.HasRows)
                 {
+                    int points = 0;
+                    int eff = 0;
                     while (reader.Read())
                     {
-                        int points = reader.GetInt32(20);
-                        ef.ID = id;
-                        ef.pts = points;
-                        ef.eff = manager.playerEff(points, reader.GetInt32(13), reader.GetInt32(14), reader.GetInt32(16), reader.GetInt32(18), reader.GetInt32(5) - reader.GetInt32(4), reader.GetInt32(9) - reader.GetInt32(8), reader.GetInt32(17));
-                    }
+                        points += reader.GetInt32(20);
+                        eff+= manager.playerEff(points, reader.GetInt32(13), reader.GetInt32(14), reader.GetInt32(16), reader.GetInt32(18), reader.GetInt32(5) - reader.GetInt32(4), reader.GetInt32(9) - reader.GetInt32(8), reader.GetInt32(17));
+                }
+                    ef.ID = id;
+                    ef.pts = points/ limit;
+                    ef.eff = eff / limit;
                 }
                 nbaDatabaseConnection.Close();
                 return ef;

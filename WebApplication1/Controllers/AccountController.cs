@@ -8,7 +8,7 @@ namespace WebApplication1.Controllers
     {
         UserDB user = new UserDB();
         GameDB game = new GameDB();
-        private string message = "";
+      //  private string message = "";
 
         [HttpGet]
         public ActionResult Register()
@@ -35,7 +35,7 @@ namespace WebApplication1.Controllers
             {
                 int id = user.getUserId(userName, pass);
                 game.CreateRankingForUser(id);
-                message = "Sėkmingai sukurtas naujas vartotojas";
+              //  message = "Sėkmingai sukurtas naujas vartotojas";
                 return RedirectToAction("LogIn");
             }
             else

@@ -10,12 +10,13 @@ namespace WebApplication1.Controllers
 {
     public class PlayersController : Controller
     {
+        PlayerManagerController PC = new PlayerManagerController();
         public ActionResult Market()
         {
-            PlayerManagerController PC = new PlayerManagerController();
             ViewBag.Message = "Players buy/sell page";
-            // List<PlayerViewModel> players = PC.getUpdatedListOfPlayers();
-            return View();
+            List<PlayerViewModel> players = PC.getUpdatedListOfPlayers();
+            players = players.OrderByDescending(x => x.Eff).ToList();
+            return View(players);
         }
     }
 }

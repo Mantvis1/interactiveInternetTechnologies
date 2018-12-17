@@ -5,17 +5,20 @@
 }
 <table class="invisibleTableBorders">
     <tr>
-        <th>Vardas</th>
-        <th>Pavarde</th>
+        <th>Vardas Pavarde</th>
         <th>Kaina</th>
-        <th></th>
+        <th>ID</th>
+        <th>Pirkti</th>
     </tr>
-    <tr>
-        <td>Vardas</td>
-        <td>Pavarde</td>
-        <td>Kaina</td>
-        <td></td>
-    </tr>
+    @foreach (var player in Model)
+    {
+        <tr>
+            <td>@player.Name</td>
+            <td>@player.getCost()</td>
+            <td>@player.ID</td>
+            <td><button class="btn-outline-success">Pirkti</button></td>
+        </tr>
+    }
 
 </table>
 
