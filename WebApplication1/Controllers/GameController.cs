@@ -12,6 +12,7 @@ namespace WebApplication1.Controllers
     {
         GameDB game = new GameDB();
         RankingDB ranking = new RankingDB();
+        UserDB DB = new UserDB();
 
         [HttpGet]
         public ActionResult GameSelection()
@@ -40,5 +41,7 @@ namespace WebApplication1.Controllers
             List<RankingModel> listOfRanks = ranking.getAllRankings(1, 2);
             return View(listOfRanks);
         }
+
+        
     }
 }

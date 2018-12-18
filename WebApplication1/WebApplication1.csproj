@@ -199,7 +199,7 @@
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\PlayerManagerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PlayersController.cs" />
+    <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="DbContext\BaseDB.cs" />
     <Compile Include="DbContext\GameDB.cs" />
     <Compile Include="DbContext\PlayerDB.cs" />
@@ -256,11 +256,11 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Players\Random.cshtml" />
-    <Content Include="Views\Players\Market.cshtml" />
+    <Content Include="Views\Player\Random.cshtml" />
+    <Content Include="Views\Player\Market.cshtml" />
     <Content Include="Views\Game\GameSelection.cshtml" />
     <Content Include="Views\Shared\_LayoutAfterLogin.cshtml" />
-    <Content Include="Views\Players\MyTeam.cshtml" />
+    <Content Include="Views\Player\MyTeam.cshtml" />
     <Content Include="Views\Game\Ranking.cshtml" />
   </ItemGroup>
   <ItemGroup>

@@ -8,12 +8,13 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
-    public class PlayersController : Controller
+    public class PlayerController : Controller
     {
         PlayerManagerController PC = new PlayerManagerController();
         UserDB DB = new UserDB();
         PlayerDB PDB = new PlayerDB();
 
+        [HttpGet]
         public ActionResult Market()
         {
             ViewBag.Message = "Players buy/sell page";
@@ -22,25 +23,27 @@ namespace WebApplication1.Controllers
             return View(players);
         }
 
-        private ActionResult AddPlayer(int? playerId)
-        {
-            if (playerId != null && Session["id"] != null)
-            {
-                int id = Convert.ToInt32(playerId);
-                DB.insertPlayerToUser((int)Session["id"], id);
-            }
-            return RedirectToAction("Market");
-        }
-
+        [HttpGet]
         public ActionResult MyTeam()
         {
             List<int> playerId = DB.getUserPlayerIdList((int)Session["id"]);
             List<PlayerModel> players = new List<PlayerModel>();
-            foreach(int id in playerId)
+            foreach (int id in playerId)
             {
                 players.Add(new PlayerModel(id, PDB.getPlayerById(id)));
             }
             return View(players);
         }
+
+        // jokiu budu nedet private, 3 valandas aiskinausi kodel neranda o čia todėl kad įdėjau "private ActionResult BuyPlayer()"
+        [HttpPost]
+        public ActionResult BuyPlayer(int playerId)
+        {
+            int id = Convert.ToInt32(playerId);
+            DB.insertPlayerToUser((int)Session["id"], id);
+            return RedirectToAction("Market", "Player");
+        }
+
+
     }
 }
