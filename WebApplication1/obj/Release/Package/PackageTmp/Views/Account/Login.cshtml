@@ -1,0 +1,21 @@
+﻿<div>@ViewBag.Title</div>
+<h2>Prisijungimas</h2>
+@if (ViewBag.ErrorMessage != null)
+{
+    <h3 class="btn-danger">@ViewBag.ErrorMessage</h3>
+}
+<form action="/Account/CheckLogIn" method="post">
+
+    <p>
+        <div>Vartotojo vardas</div>
+        <input type="text" name="userName" required />
+    </p>
+    <p>
+        <div>Slaptažodis</div>
+        <input type="password" name="pass" required />
+    </p>
+    <p>
+        <input type="submit" value="Prisijungti" />
+    </p>
+</form>
+<div>Dar neesate prisiregistravę?<button class="btn btn-info" onclick="location.href='@Url.Action("Register", "Account")'">Spauskite čia!</button></div>

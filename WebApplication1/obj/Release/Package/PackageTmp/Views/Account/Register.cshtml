@@ -1,0 +1,22 @@
+﻿<h2>Registruotis</h2>
+@if (ViewBag.ErrorMessage != null)
+{
+    <h3 class="btn-danger">@ViewBag.ErrorMessage</h3>
+}
+<form action="/Account/RegistrationForm" method="post">
+    <p>
+        <div>Vartotojo vardas</div>
+        <input type="text" name="userName" required />
+    </p>
+    <p>
+        <div>Slaptažodis</div>
+        <input type="password" name="pass" required />
+    </p>
+    <p>
+        <div>Elektroninis paštas</div>
+        <input type="email" name="email" required />
+    </p>
+
+
+    <input type="submit" value="Registruotis" />
+</form>
