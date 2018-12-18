@@ -120,18 +120,19 @@ namespace WebApplication1.DbContext
             databaseConnection.Close();
         }
 
-        public List<PlayerViewModel> getAllUserPlayers(int id)
+        public List<int> getUserPlayerIdList(int id)
         {
-            List<PlayerViewModel> players = new List<PlayerViewModel>();
+            List<int> players = new List<int>();
             databaseConnection.Open();
-            query = "SELECT * FROM `userplayer` WHERE userId = "+id;
+            query = "SELECT playerId FROM `userplayer` WHERE userId = "+ id;
             MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
             MySqlDataReader reader = commandDatabase.ExecuteReader();
+            
             if (reader.HasRows)
             {
                 while (reader.Read())
                 {
-                    players.Add(new PlayerViewModel(reader.GetInt32(0), reader.GetString(1), reader.GetDouble(2), reader.GetDouble(3)));
+                    players.Add(reader.GetInt32(0));
                 }
             }
             return players;

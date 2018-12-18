@@ -34,7 +34,12 @@ namespace WebApplication1.Controllers
 
         public ActionResult MyTeam()
         {
-            List<PlayerViewModel> players = DB.getAllUserPlayers((int)Session["id"]);
+            List<int> playerId = DB.getUserPlayerIdList((int)Session["id"]);
+            List<PlayerModel> players = new List<PlayerModel>();
+            foreach(int id in playerId)
+            {
+                players.Add(new PlayerModel(id, PDB.getPlayerById(id)));
+            }
             return View(players);
         }
     }

@@ -1,0 +1,22 @@
+﻿@model IEnumerable<WebApplication1.Models.PlayerModel>
+@{
+    ViewBag.Title = "MyTeam";
+    Layout = "~/Views/Shared/_LayoutAfterLogin.cshtml";
+}
+
+<h2>Mano komanda</h2>
+<table class="invisibleTableBorders">
+    <tr>
+
+        <th>Vardas</th>
+        <th>Taškai</th>
+    </tr>
+   @foreach(var item in Model)
+   {
+       <tr>
+           <th>@item.Name</th>
+           <th>@item.ID</th>
+       </tr>
+   }
+
+</table>

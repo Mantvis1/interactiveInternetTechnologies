@@ -77,10 +77,10 @@ namespace WebApplication1.DbContext
                     while (reader.Read())
                     {
                         points += reader.GetInt32(20);
-                        eff+= manager.playerEff(points, reader.GetInt32(13), reader.GetInt32(14), reader.GetInt32(16), reader.GetInt32(18), reader.GetInt32(5) - reader.GetInt32(4), reader.GetInt32(9) - reader.GetInt32(8), reader.GetInt32(17));
-                }
+                        eff += manager.playerEff(points, reader.GetInt32(13), reader.GetInt32(14), reader.GetInt32(16), reader.GetInt32(18), reader.GetInt32(5) - reader.GetInt32(4), reader.GetInt32(9) - reader.GetInt32(8), reader.GetInt32(17));
+                    }
                     ef.ID = id;
-                    ef.pts = points/ limit;
+                    ef.pts = points / limit;
                     ef.eff = eff / limit;
                 }
                 nbaDatabaseConnection.Close();
@@ -114,5 +114,29 @@ namespace WebApplication1.DbContext
             }
         }
 
+        public string getPlayerById(int id)
+        {
+            string name = "";
+            if (id >= 0)
+            {
+                databaseConnection.Open();
+                query = "SELECT name  FROM player WHERE id =" + id;
+                MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+                MySqlDataReader reader = commandDatabase.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        name = reader.GetString(0);
+                    }
+                }
+                databaseConnection.Close();
+                return name;
+            }
+            else
+            {
+                return "";
+            }
+        }
     }
 }

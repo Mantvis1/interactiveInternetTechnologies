@@ -259,7 +259,7 @@
     <Content Include="Views\Players\Market.cshtml" />
     <Content Include="Views\Game\GameSelection.cshtml" />
     <Content Include="Views\Shared\_LayoutAfterLogin.cshtml" />
-    <Content Include="Views\Game\MyTeam.cshtml" />
+    <Content Include="Views\Players\MyTeam.cshtml" />
     <Content Include="Views\Game\Ranking.cshtml" />
   </ItemGroup>
   <ItemGroup>

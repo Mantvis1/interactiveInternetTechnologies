@@ -20,12 +20,6 @@ namespace WebApplication1.Controllers
             ViewBag.Message = countOfPlayersInTournament;
             return View(countOfPlayersInTournament);
         }
-        [HttpGet]
-        public ActionResult MyTeam()
-        {
-            
-            return View();
-        }
 
        // [HttpPost]
         public ActionResult RegisterNewCompetotor()

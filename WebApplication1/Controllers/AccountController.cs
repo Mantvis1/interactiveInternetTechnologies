@@ -56,7 +56,7 @@ namespace WebApplication1.Controllers
                 {
                     Session["id"] = id;
                     Session["name"] = userName;
-                    return RedirectToAction("MyTeam", "Game");
+                    return RedirectToAction("MyTeam", "Players");
                 }
             }
             else
