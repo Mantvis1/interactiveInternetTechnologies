@@ -12,6 +12,8 @@ namespace WebApplication1.Controllers
     {
         PlayerManagerController PC = new PlayerManagerController();
         UserDB DB = new UserDB();
+        PlayerDB PDB = new PlayerDB();
+
         public ActionResult Market()
         {
             ViewBag.Message = "Players buy/sell page";
@@ -20,7 +22,7 @@ namespace WebApplication1.Controllers
             return View(players);
         }
 
-        public ActionResult AddPlayer(int? playerId)
+        private ActionResult AddPlayer(int? playerId)
         {
             if (playerId != null && Session["id"] != null)
             {
@@ -28,6 +30,12 @@ namespace WebApplication1.Controllers
                 DB.insertPlayerToUser((int)Session["id"], id);
             }
             return RedirectToAction("Market");
+        }
+
+        public ActionResult MyTeam()
+        {
+            List<PlayerViewModel> players = DB.getAllUserPlayers((int)Session["id"]);
+            return View(players);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using WebApplication1.Models;
@@ -117,6 +118,23 @@ namespace WebApplication1.DbContext
             MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
             MySqlDataReader reader = commandDatabase.ExecuteReader();
             databaseConnection.Close();
+        }
+
+        public List<PlayerViewModel> getAllUserPlayers(int id)
+        {
+            List<PlayerViewModel> players = new List<PlayerViewModel>();
+            databaseConnection.Open();
+            query = "SELECT * FROM `userplayer` WHERE userId = "+id;
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            MySqlDataReader reader = commandDatabase.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    players.Add(new PlayerViewModel(reader.GetInt32(0), reader.GetString(1), reader.GetDouble(2), reader.GetDouble(3)));
+                }
+            }
+            return players;
         }
     }
 }
