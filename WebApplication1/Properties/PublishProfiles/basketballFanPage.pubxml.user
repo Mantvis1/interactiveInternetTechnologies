@@ -158,7 +158,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/28/2015 04:04:30</publishTime>
     </File>
     <File Include="bin/WebApplication1.dll">
-      <publishTime>12/18/2018 17:34:19</publishTime>
+      <publishTime>12/18/2018 21:23:21</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>09/10/2013 18:28:38</publishTime>
@@ -221,7 +221,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/30/2018 21:05:58</publishTime>
     </File>
     <File Include="Views/Account/Login.cshtml">
-      <publishTime>12/18/2018 10:51:01</publishTime>
+      <publishTime>12/18/2018 19:25:53</publishTime>
     </File>
     <File Include="Views/Account/Register.cshtml">
       <publishTime>12/18/2018 10:43:18</publishTime>
@@ -237,6 +237,15 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Views/Home/Index.cshtml">
       <publishTime>11/02/2018 15:20:35</publishTime>
+    </File>
+    <File Include="Views/Player/Market.cshtml">
+      <publishTime>12/18/2018 21:20:40</publishTime>
+    </File>
+    <File Include="Views/Player/MyTeam.cshtml">
+      <publishTime>12/18/2018 19:34:02</publishTime>
+    </File>
+    <File Include="Views/Player/Random.cshtml">
+      <publishTime>12/13/2018 17:49:53</publishTime>
     </File>
     <File Include="Views/Players/Market.cshtml">
       <publishTime>12/17/2018 10:42:41</publishTime>
@@ -254,10 +263,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/30/2018 12:05:50</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>12/13/2018 17:49:00</publishTime>
+      <publishTime>12/18/2018 18:58:43</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutAfterLogin.cshtml">
-      <publishTime>12/17/2018 12:50:06</publishTime>
+      <publishTime>12/18/2018 20:56:10</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>12/13/2018 17:49:07</publishTime>
@@ -269,7 +278,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/13/2018 17:49:17</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>12/18/2018 17:17:22</publishTime>
+      <publishTime>12/18/2018 21:23:24</publishTime>
     </File>
   </ItemGroup>
 </Project>
