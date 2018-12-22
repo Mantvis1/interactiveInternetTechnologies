@@ -35,7 +35,6 @@ namespace WebApplication1.Controllers
             {
                 int id = user.getUserId(userName, pass);
                 game.CreateRankingForUser(id);
-              //  message = "Sėkmingai sukurtas naujas vartotojas";
                 return RedirectToAction("LogIn");
             }
             else

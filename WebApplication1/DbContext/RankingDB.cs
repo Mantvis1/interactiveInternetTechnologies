@@ -19,6 +19,7 @@ namespace WebApplication1.DbContext
 
         public List<RankingModel> getAllRankings(int start, int end)
         {
+            int rank = 1;
             List<RankingModel> rankings = new List<RankingModel>();
 
             if (end > 0 && start >= 0 && end > start)
@@ -32,7 +33,7 @@ namespace WebApplication1.DbContext
                     while (reader.Read())
                     {
                         string name = user.getNameById(reader.GetInt32(1));
-                        rankings.Add(new RankingModel(name, reader.GetInt32(2), reader.GetInt32(3), reader.GetInt32(4)));
+                        rankings.Add(new RankingModel(rank++,name, reader.GetInt32(2), reader.GetInt32(3), reader.GetInt32(4)));
                     }
                 }
                 databaseConnection.Close();

@@ -2,13 +2,15 @@
 {
     public class RankingModel : BaseModel
     {
+        public int Rank;
         public string Name;
         public int Win;
         public int Lose;
         public int Value;
 
-        public RankingModel(string Name, int Win, int Lose, int Value)
+        public RankingModel(int Rank, string Name, int Win, int Lose, int Value)
         {
+            this.Rank = Rank;
             this.Name = Name;
             this.Win = Win;
             this.Lose = Lose;

@@ -2,7 +2,6 @@
 @{
     ViewBag.Title = "Ranking";
     Layout = "~/Views/Shared/_LayoutAfterLogin.cshtml";
-    int rank = 1;
 }
 
 <h2>Žadiėjų reitingai</h2>
@@ -18,7 +17,7 @@
     @foreach (var player in Model)
     {
         <tr>
-            <td>@rank</td>
+            <td>@player.Rank</td>
             <td>@player.Name</td>
             <td>@player.Win</td>
             <td>@player.Lose</td>
