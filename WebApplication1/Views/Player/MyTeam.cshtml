@@ -10,12 +10,19 @@
 
         <th>Vardas</th>
         <th>Taškai</th>
+        <th>Parduoti?</th>
     </tr>
     @foreach (var item in Model)
     {
         <tr>
-            <th>@item.Name</th>
-            <th>@item.Points</th>
+            <td>@item.Name</td>
+            <td>@item.Points</td>
+            <td>
+                <form action="/Player/SellPlayer" method="post">
+                    <input type="hidden" name="playerId" value="@item.ID" />
+                    <button type="submit">Parduoti</button>
+                </form>
+            </td>
         </tr>
     }
 

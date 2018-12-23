@@ -30,8 +30,9 @@ namespace WebApplication1.Controllers
             List<PlayerViewModel> players = new List<PlayerViewModel>();
             foreach (int id in playerId)
             {
-                players.Add(new PlayerViewModel(id, PDB.getPlayerById(id),PDB.getPlayerPointsById(id),0));
+                players.Add(new PlayerViewModel(id, PDB.getPlayerById(id), PDB.getPlayerPointsById(id), 0));
             }
+            players.OrderBy(x => x.Points);
             return View(players);
         }
 
@@ -39,9 +40,35 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult BuyPlayer(int playerId)
         {
-            int id = Convert.ToInt32(playerId);
-            DB.insertPlayerToUser((int)Session["id"], id);
-            return RedirectToAction("Market", "Player");
+            int foundPlayerCount = DB.isUserHavePlayerById(playerId);
+            if (foundPlayerCount == -1)
+            {
+                //Session error
+            }
+            else if (foundPlayerCount == 0)
+            {
+                DB.insertPlayerToUser((int)Session["id"], playerId);
+            }
+            else
+            {
+                // Toks zaidejas jau egzistuoja/ Prikti negalima
+            }
+            return RedirectToAction("Market");
+        }
+
+        [HttpPost]
+        public ActionResult SellPlayer(int playerId)
+        {
+            bool isDeleted = DB.DeletePlayerById(playerId, (int)Session["id"]);
+            if (isDeleted == true)
+            {
+
+            }
+            else
+            {
+                // klaida
+            }
+            return RedirectToAction("MyTeam");
         }
     }
 }

@@ -124,10 +124,10 @@ namespace WebApplication1.DbContext
         {
             List<int> players = new List<int>();
             databaseConnection.Open();
-            query = "SELECT playerId FROM `userplayer` WHERE userId = "+ id;
+            query = "SELECT playerId FROM `userplayer` WHERE userId = " + id;
             MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
             MySqlDataReader reader = commandDatabase.ExecuteReader();
-            
+
             if (reader.HasRows)
             {
                 while (reader.Read())
@@ -136,6 +136,47 @@ namespace WebApplication1.DbContext
                 }
             }
             return players;
+        }
+        public bool DeletePlayerById(int playerId, int userId)
+        {
+            if (playerId >= 0 && userId >= 0)
+            {
+                databaseConnection.Open();
+                query = "DELETE FROM userplayer WHERE userId = " + userId + " and  playerId = " + playerId;
+                MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+                MySqlDataReader reader = commandDatabase.ExecuteReader();
+                databaseConnection.Close();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public int isUserHavePlayerById(int playerId)
+        {
+            if (playerId >= 0)
+            {
+                int count = -1;
+                databaseConnection.Open();
+                query = "SELECT Count(id) FROM userplayer WHERE `playerId`=" + playerId;
+                MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+                MySqlDataReader reader = commandDatabase.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        count = reader.GetInt32(0);
+                    }
+                }
+                databaseConnection.Close();
+                return count;
+            }
+            else
+            {
+                return -1;
+            }
         }
     }
 }

@@ -193,5 +193,7 @@ namespace WebApplication1.DbContext
             databaseConnection.Close();
             return points;
         }
+
+        
     }
 }
