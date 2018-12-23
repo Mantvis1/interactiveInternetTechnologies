@@ -18,22 +18,19 @@ namespace WebApplication1.Controllers
 
         }
 
+
         public int playerEff(int pts, int reb, int ast, int stl, int blk, int missedFG, int missedFT, int to)
         {
             return pts + reb + ast + blk - missedFG - missedFT - to;
         }
 
+        [HttpGet]
         public List<PlayerViewModel> getUpdatedListOfPlayers()
         {
-            List<PlayerModel> players = PDB.getAllPlayers();
-            List<PlayerViewModel> updatedList = new List<PlayerViewModel>();
-            EffModel efectivity = new EffModel();
-            for (int i = 0; i < 10; i++)
-            {
-                efectivity = PDB.getEff(players[i].ID);
-                updatedList.Add(new PlayerViewModel(players[i].ID, players[i].Name, efectivity.pts, efectivity.eff));
-            }
-            return updatedList;
+            List<PlayerViewModel> players = new List<PlayerViewModel>();
+         //   List<PlayerModel> playersList = PDB.getAllLocalPlayers();
+            players.Add(new PlayerViewModel(1, "namer", 22, 53));
+            return players;
         }
     }
 }

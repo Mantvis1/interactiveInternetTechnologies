@@ -138,5 +138,23 @@ namespace WebApplication1.DbContext
                 return "";
             }
         }
+
+        public List<PlayerModel> getAllLocalPlayers()
+        {
+            List<PlayerModel> players = new List<PlayerModel>();
+            databaseConnection.Open();
+            query = "SELECT * FROM Player";
+            MySqlCommand commandDatabase = new MySqlCommand(query, nbaDatabaseConnection);
+            MySqlDataReader reader = commandDatabase.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    players.Add(new PlayerModel(reader.GetInt32(0), reader.GetString(1)));
+                }
+            }
+            databaseConnection.Close();
+            return players;
+        }
     }
 }

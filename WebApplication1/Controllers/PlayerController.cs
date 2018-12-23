@@ -17,9 +17,10 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult Market()
         {
-            ViewBag.Message = "Players buy/sell page";
+            // ViewBag.Message = "Players buy/sell page";
             List<PlayerViewModel> players = PC.getUpdatedListOfPlayers();
-            players = players.OrderByDescending(x => x.Eff).ToList();
+           
+               players = players.OrderByDescending(x => x.Eff).ToList();
             return View(players);
         }
 

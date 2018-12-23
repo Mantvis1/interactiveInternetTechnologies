@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<WebApplication1.Models.PlayerViewModel>
 @{
-    ViewBag.Title = "Market";
     Layout = "~/Views/Shared/_LayoutAfterLogin.cshtml";
 }
 
@@ -10,18 +9,12 @@
         <th>Kaina</th>
         <th>Pirkti</th>
     </tr>
-    @foreach (var player in Model)
+    @foreach(var player in Model)
     {
         <tr>
             <td>@player.Name</td>
             <td>@player.getCost()</td>
-            <td>
-                <form action="/Player/BuyPlayer" method="post">
-                    <input class="hidden" type="text" name="playerId" value="@player.ID" readonly />
-                    <button type="submit" class="btn-outline-success">Pirkti</button>
-                </form>
-            </td>
-
+            <td><button>Pirkti</button></td>
         </tr>
     }
 </table>
