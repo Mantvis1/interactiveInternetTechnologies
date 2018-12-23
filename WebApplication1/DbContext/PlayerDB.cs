@@ -144,7 +144,7 @@ namespace WebApplication1.DbContext
             List<PlayerModel> players = new List<PlayerModel>();
             databaseConnection.Open();
             query = "SELECT * FROM Player";
-            MySqlCommand commandDatabase = new MySqlCommand(query, nbaDatabaseConnection);
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
             MySqlDataReader reader = commandDatabase.ExecuteReader();
             if (reader.HasRows)
             {
@@ -155,6 +155,25 @@ namespace WebApplication1.DbContext
             }
             databaseConnection.Close();
             return players;
+        }
+
+        public EffModel getPointsAndEff(int id)
+        {
+            EffModel eff = new EffModel();
+            databaseConnection.Open();
+            query = "SELECT points, eff FROM playerinfo WHERE id = " + id;
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            MySqlDataReader reader = commandDatabase.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    eff.eff = reader.GetDouble(1);
+                    eff.pts = reader.GetDouble(0);
+                }
+            }
+            databaseConnection.Close();
+            return eff;
         }
     }
 }

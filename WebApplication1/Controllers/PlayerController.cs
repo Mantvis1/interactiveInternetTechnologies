@@ -19,8 +19,7 @@ namespace WebApplication1.Controllers
         {
             // ViewBag.Message = "Players buy/sell page";
             List<PlayerViewModel> players = PC.getUpdatedListOfPlayers();
-           
-               players = players.OrderByDescending(x => x.Eff).ToList();
+            players = players.OrderByDescending(x => x.Eff).ToList();
             return View(players);
         }
 
@@ -44,7 +43,5 @@ namespace WebApplication1.Controllers
             DB.insertPlayerToUser((int)Session["id"], id);
             return RedirectToAction("Market", "Player");
         }
-
-
     }
 }

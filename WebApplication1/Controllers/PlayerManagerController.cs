@@ -28,8 +28,13 @@ namespace WebApplication1.Controllers
         public List<PlayerViewModel> getUpdatedListOfPlayers()
         {
             List<PlayerViewModel> players = new List<PlayerViewModel>();
-         //   List<PlayerModel> playersList = PDB.getAllLocalPlayers();
-            players.Add(new PlayerViewModel(1, "namer", 22, 53));
+            List<PlayerModel> playersList = PDB.getAllLocalPlayers();
+            
+            for (int i = 0; i < 10; i++) // test value
+            {
+                EffModel ef = PDB.getPointsAndEff(playersList[i].ID);
+                players.Add(new PlayerViewModel(playersList[i].ID, playersList[i].Name, ef.pts, ef.eff));
+            }
             return players;
         }
     }
