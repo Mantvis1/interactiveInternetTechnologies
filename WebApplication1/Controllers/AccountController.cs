@@ -8,7 +8,6 @@ namespace WebApplication1.Controllers
     {
         UserDB user = new UserDB();
         GameDB game = new GameDB();
-      //  private string message = "";
 
         [HttpGet]
         public ActionResult Register()
@@ -40,7 +39,7 @@ namespace WebApplication1.Controllers
             else
             {
                 Session["error"] = "Vartotojas tokiu vardu jau yra";
-               return RedirectToAction("Register");
+                return RedirectToAction("Register");
             }
         }
 

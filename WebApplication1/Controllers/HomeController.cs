@@ -13,7 +13,7 @@ namespace WebApplication1.Controllers
         PlayerDB player = new PlayerDB();
         public ActionResult Index()
         {
-         //   UpdateExistingDatabase();
+            //   UpdateExistingDatabase();
             return View();
         }
 

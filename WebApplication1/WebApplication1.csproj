@@ -197,6 +197,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\GameController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PlayerManagerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
@@ -262,6 +263,7 @@
     <Content Include="Views\Shared\_LayoutAfterLogin.cshtml" />
     <Content Include="Views\Player\MyTeam.cshtml" />
     <Content Include="Views\Game\Ranking.cshtml" />
+    <Content Include="Views\Manage\Settings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
