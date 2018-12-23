@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebApplication1.Models.PlayerModel>
+﻿@model IEnumerable<WebApplication1.Models.PlayerViewModel>
 @{
     ViewBag.Title = "MyTeam";
     Layout = "~/Views/Shared/_LayoutAfterLogin.cshtml";
@@ -11,12 +11,12 @@
         <th>Vardas</th>
         <th>Taškai</th>
     </tr>
-   @foreach(var item in Model)
-   {
-       <tr>
-           <th>@item.Name</th>
-           <th>@item.ID</th>
-       </tr>
-   }
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>@item.Name</th>
+            <th>@item.Points</th>
+        </tr>
+    }
 
 </table>

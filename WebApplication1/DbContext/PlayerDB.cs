@@ -175,5 +175,23 @@ namespace WebApplication1.DbContext
             databaseConnection.Close();
             return eff;
         }
+
+        public double getPlayerPointsById(int id)
+        {
+            double points = 0;
+            databaseConnection.Open();
+            query = "Select points from playerinfo where id =" + id;
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            MySqlDataReader reader = commandDatabase.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    points = reader.GetInt32(0);
+                }
+            }
+            databaseConnection.Close();
+            return points;
+        }
     }
 }

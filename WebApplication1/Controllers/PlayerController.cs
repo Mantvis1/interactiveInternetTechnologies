@@ -27,10 +27,10 @@ namespace WebApplication1.Controllers
         public ActionResult MyTeam()
         {
             List<int> playerId = DB.getUserPlayerIdList((int)Session["id"]);
-            List<PlayerModel> players = new List<PlayerModel>();
+            List<PlayerViewModel> players = new List<PlayerViewModel>();
             foreach (int id in playerId)
             {
-                players.Add(new PlayerModel(id, PDB.getPlayerById(id)));
+                players.Add(new PlayerViewModel(id, PDB.getPlayerById(id),PDB.getPlayerPointsById(id),0));
             }
             return View(players);
         }
