@@ -9,12 +9,17 @@
         <th>Kaina</th>
         <th>Pirkti</th>
     </tr>
-    @foreach(var player in Model)
+    @foreach (var player in Model)
     {
         <tr>
             <td>@player.Name</td>
             <td>@player.getCost()</td>
-            <td><button>Pirkti</button></td>
+            <td>
+                <form action="/Player/BuyPlayer" method="post">
+                    <input type="hidden" name="playerId" value="@player.ID" />
+                    <button>Pirkti</button>
+                </form>
+            </td>
         </tr>
     }
 </table>
