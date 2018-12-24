@@ -211,6 +211,7 @@
     </Compile>
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\EffModel.cs" />
+    <Compile Include="Models\PagingModel.cs" />
     <Compile Include="Models\PlayerModel.cs" />
     <Compile Include="Models\PlayerViewModel.cs" />
     <Compile Include="Models\RankingModel.cs" />

@@ -13,6 +13,7 @@ namespace WebApplication1.Controllers
         PlayerManagerController PC = new PlayerManagerController();
         UserDB DB = new UserDB();
         PlayerDB PDB = new PlayerDB();
+        PagingModel page = new PagingModel(); 
 
         [HttpGet]
         public ActionResult Market()
