@@ -65,7 +65,7 @@ namespace WebApplication1.Controllers
 
         // jokiu budu nedet private, 3 valandas aiskinausi kodel neranda o čia todėl kad įdėjau "private ActionResult BuyPlayer()"
         [HttpPost]
-        public ActionResult BuyPlayer(int playerId)
+        public ActionResult BuyPlayer(int playerId, int cost)
         {
             int foundPlayerCount = DB.isUserHavePlayerById(playerId);
             if (foundPlayerCount == -1)
@@ -74,7 +74,12 @@ namespace WebApplication1.Controllers
             }
             else if (foundPlayerCount == 0)
             {
-                DB.insertPlayerToUser((int)Session["id"], playerId);
+                int userMoney = DB.getMoneyById((int)Session["id"]);
+                if (userMoney >= cost)
+                {
+                    DB.insertPlayerToUser((int)Session["id"], playerId);
+                    DB.updateUserMoney((int)Session["id"], userMoney - cost);
+                }
             }
             else
             {

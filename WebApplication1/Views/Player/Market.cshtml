@@ -16,29 +16,30 @@
             <td>@player.getCost()</td>
             <td>
                 <form action="/Player/BuyPlayer" method="post">
-                    <input type="hidden" name="playerId" value="@player.ID" />
+                    <input type="hidden" name="playerId" value="@player.ID" readonly />
+                    <input type="hidden" name="cost" value="@player.getCost()" readonly />
                     <button>Pirkti</button>
                 </form>
             </td>
         </tr>
     }
 </table>
-<h3>
-    <form method="post" action="/Player/ChangePage">
+<form method="post" action="/Player/ChangePage">
+    <h3>
         <button name="pageNumber" type="submit" value="@Model.Page.firstPage">@Model.Page.firstPage</button>
         ...
         @if (Model.Page.beforePage != 0)
-        {
+            {
             <button name="pageNumber" type="submit" value="@Model.Page.beforePage">@Model.Page.beforePage</button>
         }
 
         <button name="pageNumber" type="submit" value="@Model.Page.currentPage"><b>@Model.Page.currentPage</b></button>
 
         @if (Model.Page.nextPage < Model.Page.lastPage)
-        {
+            {
             <button name="pageNumber" type="submit" value="@Model.Page.nextPage">@Model.Page.nextPage</button>
         }
         ...
         <button name="pageNumber" type="submit" value="@Model.Page.lastPage">@Model.Page.lastPage</button>
-    </form>
-</h3>
+    </h3>
+</form>

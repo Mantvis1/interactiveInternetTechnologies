@@ -35,7 +35,7 @@ namespace WebApplication1.DbContext
                 if (count == 0)
                 {
                     databaseConnection.Open();
-                    query = "INSERT INTO user (id, Name, Password, Email) VALUES (NULL, '" + user.UserName + "', '" + user.Password + "', '" + user.Email + "');";
+                    query = "INSERT INTO user (id, Name, Password, Email,Money) VALUES (NULL, '" + user.UserName + "', '" + user.Password + "', '" + user.Email + "',500);";
                     commandDatabase = new MySqlCommand(query, databaseConnection);
 
                     reader = commandDatabase.ExecuteReader();
@@ -177,6 +177,33 @@ namespace WebApplication1.DbContext
             {
                 return -1;
             }
+        }
+
+        public int getMoneyById(int id)
+        {
+            int money = 0;
+            databaseConnection.Open();
+            query = "SELECT money from user where id = " + id;
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            MySqlDataReader reader = commandDatabase.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    money = reader.GetInt32(0);
+                }
+            }
+            databaseConnection.Close();
+            return money;
+        }
+
+        public void updateUserMoney(int id, int result)
+        {
+            databaseConnection.Open();
+            query = "UPDATE user SET money =" + result + " WHERE id =" + id;
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            MySqlDataReader reader = commandDatabase.ExecuteReader();
+            databaseConnection.Close();
         }
     }
 }
