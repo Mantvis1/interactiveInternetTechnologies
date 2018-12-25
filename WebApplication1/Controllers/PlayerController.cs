@@ -13,15 +13,19 @@ namespace WebApplication1.Controllers
         PlayerManagerController PC = new PlayerManagerController();
         UserDB DB = new UserDB();
         PlayerDB PDB = new PlayerDB();
-        PagingModel page = new PagingModel(); 
 
         [HttpGet]
         public ActionResult Market()
         {
-            // ViewBag.Message = "Players buy/sell page";
-            List<PlayerViewModel> players = PC.getUpdatedListOfPlayers();
-            players = players.OrderByDescending(x => x.Eff).ToList();
-            return View(players);
+            List<PlayerViewModel> localPlayers = PC.getUpdatedListOfPlayers();
+            double pageCount = localPlayers.Count / 10;
+            PagingModel page = new PagingModel(current: 5, last: (Convert.ToInt32(Math.Floor(pageCount) + 1)));
+            var MarketViewModel = new PagedViewModel
+            {
+                players = localPlayers,
+                Page = page
+            };
+            return View(MarketViewModel);
         }
 
         [HttpGet]
@@ -70,6 +74,14 @@ namespace WebApplication1.Controllers
                 // klaida
             }
             return RedirectToAction("MyTeam");
+        }
+
+        [HttpPost]
+        public ActionResult ChangePage()
+        {
+          //  Session[""];
+
+            return RedirectToAction("Market");
         }
     }
 }

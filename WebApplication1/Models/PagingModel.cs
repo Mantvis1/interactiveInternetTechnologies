@@ -13,13 +13,13 @@ namespace WebApplication1.Models
         public int nextPage;
         public int beforePage;
 
-        public PagingModel(int first, int last, int current)
+        public PagingModel(int last, int current)
         {
-            this.firstPage = first;
+            this.firstPage = 1;
             this.lastPage = last;
             this.currentPage = current;
-            this.nextPage = current++;
-            this.beforePage = current--;
+            this.nextPage = currentPage + 1;
+            this.beforePage = currentPage - 1;
         }
 
         public PagingModel()

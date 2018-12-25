@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebApplication1.Models.PlayerViewModel>
+﻿@model WebApplication1.Models.PagedViewModel
 @{
     Layout = "~/Views/Shared/_LayoutAfterLogin.cshtml";
 }
@@ -9,7 +9,7 @@
         <th>Kaina</th>
         <th>Pirkti</th>
     </tr>
-    @foreach (var player in Model)
+    @foreach (var player in Model.players)
     {
         <tr>
             <td>@player.Name</td>
@@ -23,3 +23,16 @@
         </tr>
     }
 </table>
+<form action="/Player/ChangePage" method="post">
+    <h3>
+        <a name="first" value="@Model.Page.firstPage">@Model.Page.firstPage</a>
+        ...
+        <a name="before" value="@Model.Page.beforePage">@Model.Page.beforePage</a>
+        <b> <a name="current" value="@Model.Page.currentPage">@Model.Page.currentPage</a></b>
+        <a name="next" value="@Model.Page.nextPage">@Model.Page.nextPage</a>
+        ...
+        <a name="last" value="@Model.Page.lastPage">@Model.Page.lastPage</a>
+    </h3>
+</form>
+
+
