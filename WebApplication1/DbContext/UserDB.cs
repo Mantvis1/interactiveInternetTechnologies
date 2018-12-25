@@ -122,7 +122,7 @@ namespace WebApplication1.DbContext
 
         public List<int> getUserPlayerIdList(int id)
         {
-            List<int> players = new List<int>();
+            List<int> Player = new List<int>();
             databaseConnection.Open();
             query = "SELECT playerId FROM `userplayer` WHERE userId = " + id;
             MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
@@ -132,10 +132,10 @@ namespace WebApplication1.DbContext
             {
                 while (reader.Read())
                 {
-                    players.Add(reader.GetInt32(0));
+                    Player.Add(reader.GetInt32(0));
                 }
             }
-            return players;
+            return Player;
         }
         public bool DeletePlayerById(int playerId, int userId)
         {

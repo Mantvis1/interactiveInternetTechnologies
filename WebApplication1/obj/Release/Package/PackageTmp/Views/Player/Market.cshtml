@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebApplication1.Models.PlayerViewModel>
+﻿@model WebApplication1.Models.PagedViewModel
 @{
     Layout = "~/Views/Shared/_LayoutAfterLogin.cshtml";
 }
@@ -9,7 +9,7 @@
         <th>Kaina</th>
         <th>Pirkti</th>
     </tr>
-    @foreach (var player in Model)
+    @foreach (var player in Model.players)
     {
         <tr>
             <td>@player.Name</td>
@@ -23,3 +23,22 @@
         </tr>
     }
 </table>
+<h3>
+    <form method="post" action="/Player/ChangePage">
+        <button name="pageNumber" type="submit" value="@Model.Page.firstPage">@Model.Page.firstPage</button>
+        ...
+        @if (Model.Page.beforePage != 0)
+        {
+            <button name="pageNumber" type="submit" value="@Model.Page.beforePage">@Model.Page.beforePage</button>
+        }
+
+        <button name="pageNumber" type="submit" value="@Model.Page.currentPage"><b>@Model.Page.currentPage</b></button>
+
+        @if (Model.Page.nextPage < Model.Page.lastPage)
+        {
+            <button name="pageNumber" type="submit" value="@Model.Page.nextPage">@Model.Page.nextPage</button>
+        }
+        ...
+        <button name="pageNumber" type="submit" value="@Model.Page.lastPage">@Model.Page.lastPage</button>
+    </form>
+</h3>

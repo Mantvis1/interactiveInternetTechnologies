@@ -27,19 +27,19 @@ namespace WebApplication1.Controllers
         private void UpdateExistingDatabase()
         {
             List<EffModel> eff = new List<EffModel>();
-            List<PlayerModel> players = player.getAllPlayers();
+            List<PlayerModel> Player = player.getAllPlayers();
             bool clearedInfoTable = player.clearAllEffTable();
             /*  bool cleared = player.clearAllPlayerTable();
               if(cleared == true)
               {
-                  foreach (var onePlayer in players)
+                  foreach (var onePlayer in Player)
                   {
                      player.addPlayer(onePlayer);
                   }
 
               }
               */
-            foreach (var item in players)
+            foreach (var item in Player)
             {
                 eff.Add(player.getEff(item.ID));
             }

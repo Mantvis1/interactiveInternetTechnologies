@@ -21,7 +21,7 @@ namespace WebApplication1.DbContext
 
         public List<PlayerModel> getAllPlayers()
         {
-            List<PlayerModel> players = new List<PlayerModel>();
+            List<PlayerModel> Player = new List<PlayerModel>();
             nbaDatabaseConnection.Open();
             query = "SELECT * FROM Player";
             MySqlCommand commandDatabase = new MySqlCommand(query, nbaDatabaseConnection);
@@ -30,11 +30,11 @@ namespace WebApplication1.DbContext
             {
                 while (reader.Read())
                 {
-                    players.Add(new PlayerModel(reader.GetInt32(0), reader.GetString(1)));
+                    Player.Add(new PlayerModel(reader.GetInt32(0), reader.GetString(1)));
                 }
             }
             nbaDatabaseConnection.Close();
-            return players;
+            return Player;
         }
 
         public void addPlayer(PlayerModel player)
@@ -141,7 +141,7 @@ namespace WebApplication1.DbContext
 
         public List<PlayerModel> getAllLocalPlayers()
         {
-            List<PlayerModel> players = new List<PlayerModel>();
+            List<PlayerModel> Player = new List<PlayerModel>();
             databaseConnection.Open();
             query = "SELECT * FROM Player";
             MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
@@ -150,11 +150,11 @@ namespace WebApplication1.DbContext
             {
                 while (reader.Read())
                 {
-                    players.Add(new PlayerModel(reader.GetInt32(0), reader.GetString(1)));
+                    Player.Add(new PlayerModel(reader.GetInt32(0), reader.GetString(1)));
                 }
             }
             databaseConnection.Close();
-            return players;
+            return Player;
         }
 
         public EffModel getPointsAndEff(int id)

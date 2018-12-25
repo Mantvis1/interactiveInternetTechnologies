@@ -17,9 +17,9 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult GameSelection()
         {
-            int countOfPlayersInTournament = game.CountOfTournamentPlayers();
-            ViewBag.Message = countOfPlayersInTournament;
-            return View(countOfPlayersInTournament);
+            int countOfPlayerInTournament = game.CountOfTournamentPlayer();
+            ViewBag.Message = countOfPlayerInTournament;
+            return View(countOfPlayerInTournament);
         }
 
        // [HttpPost]

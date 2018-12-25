@@ -23,16 +23,22 @@
         </tr>
     }
 </table>
-<form action="/Player/ChangePage" method="post">
-    <h3>
-        <a name="first" value="@Model.Page.firstPage">@Model.Page.firstPage</a>
+<h3>
+    <form method="post" action="/Player/ChangePage">
+        <button name="pageNumber" type="submit" value="@Model.Page.firstPage">@Model.Page.firstPage</button>
         ...
-        <a name="before" value="@Model.Page.beforePage">@Model.Page.beforePage</a>
-        <b> <a name="current" value="@Model.Page.currentPage">@Model.Page.currentPage</a></b>
-        <a name="next" value="@Model.Page.nextPage">@Model.Page.nextPage</a>
+        @if (Model.Page.beforePage != 0)
+        {
+            <button name="pageNumber" type="submit" value="@Model.Page.beforePage">@Model.Page.beforePage</button>
+        }
+
+        <button name="pageNumber" type="submit" value="@Model.Page.currentPage"><b>@Model.Page.currentPage</b></button>
+
+        @if (Model.Page.nextPage < Model.Page.lastPage)
+        {
+            <button name="pageNumber" type="submit" value="@Model.Page.nextPage">@Model.Page.nextPage</button>
+        }
         ...
-        <a name="last" value="@Model.Page.lastPage">@Model.Page.lastPage</a>
-    </h3>
-</form>
-
-
+        <button name="pageNumber" type="submit" value="@Model.Page.lastPage">@Model.Page.lastPage</button>
+    </form>
+</h3>

@@ -14,7 +14,7 @@ namespace WebApplication1.DbContext
 
         }
 
-        public int CountOfTournamentPlayers()
+        public int CountOfTournamentPlayer()
         {
             int count = 0;
             databaseConnection.Open();

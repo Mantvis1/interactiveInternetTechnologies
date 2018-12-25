@@ -13,16 +13,38 @@ namespace WebApplication1.Controllers
         PlayerManagerController PC = new PlayerManagerController();
         UserDB DB = new UserDB();
         PlayerDB PDB = new PlayerDB();
+        private int numberInPage = 10;
+        List<PlayerViewModel> localPlayers = new List<PlayerViewModel>();
 
         [HttpGet]
         public ActionResult Market()
         {
             List<PlayerViewModel> localPlayers = PC.getUpdatedListOfPlayers();
-            double pageCount = localPlayers.Count / 10;
-            PagingModel page = new PagingModel(current: 5, last: (Convert.ToInt32(Math.Floor(pageCount) + 1)));
+            List<PlayerViewModel> showPlayers = new List<PlayerViewModel>();
+            double pageCount = localPlayers.Count / numberInPage;
+            PagingModel page = new PagingModel();
+            if (Session["currentPage"] == null)
+            {
+                showPlayers.AddRange(localPlayers.GetRange(0, numberInPage));
+                page = new PagingModel(current: 1, last: (Convert.ToInt32(Math.Floor(pageCount) + 1)));
+            }
+            else
+            {
+                int startIndex = ((int)Session["currentPage"] - 1) * numberInPage;
+                if (localPlayers.Count - startIndex < numberInPage)
+                {
+                    showPlayers.AddRange(localPlayers.GetRange(((int)Session["currentPage"] - 1) * numberInPage, localPlayers.Count - startIndex));
+                }
+                else
+                {
+                    showPlayers.AddRange(localPlayers.GetRange(((int)Session["currentPage"] - 1) * numberInPage, numberInPage));
+                }
+                page = new PagingModel(current: (int)Session["currentPage"], last: (Convert.ToInt32(Math.Floor(pageCount) + 1)));
+            }
+            Session["currentPage"] = null;
             var MarketViewModel = new PagedViewModel
             {
-                players = localPlayers,
+                players = showPlayers,
                 Page = page
             };
             return View(MarketViewModel);
@@ -76,11 +98,13 @@ namespace WebApplication1.Controllers
             return RedirectToAction("MyTeam");
         }
 
-        [HttpPost]
-        public ActionResult ChangePage()
+        //   [HttpPost]
+        public ActionResult ChangePage(int? pageNumber)
         {
-          //  Session[""];
-
+            if (pageNumber != null)
+            {
+                Session["currentPage"] = Convert.ToInt32(pageNumber);
+            }
             return RedirectToAction("Market");
         }
     }
