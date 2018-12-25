@@ -59,8 +59,8 @@ namespace WebApplication1.Controllers
             }
             else
             {
-                Session["error"] = "Tokio vartotojo nėra.";
-                return View("LogIn");
+                Session["error"] = "Klaida įvedant vardą arba slaptažodį";
+                return RedirectToAction("LogIn");
             }
             return View();
         }
