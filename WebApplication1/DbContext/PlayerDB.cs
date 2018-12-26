@@ -194,6 +194,22 @@ namespace WebApplication1.DbContext
             return points;
         }
 
-        
+        public double getEffById(int id)
+        {
+            double eff = 0;
+            databaseConnection.Open();
+            query = "Select eff from playerinfo where id =" + id;
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            MySqlDataReader reader = commandDatabase.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    eff = reader.GetInt32(0);
+                }
+            }
+            databaseConnection.Close();
+            return eff;
+        }
     }
 }

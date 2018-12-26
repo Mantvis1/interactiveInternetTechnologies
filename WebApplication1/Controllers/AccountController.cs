@@ -54,6 +54,7 @@ namespace WebApplication1.Controllers
                 {
                     Session["id"] = id;
                     Session["name"] = userName;
+                    Session["money"] = user.getMoneyById(id);
                     return RedirectToAction("MyTeam", "Player");
                 }
             }

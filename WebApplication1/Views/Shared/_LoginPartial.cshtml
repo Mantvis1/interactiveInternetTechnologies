@@ -1,4 +1,4 @@
-﻿@using Microsoft.AspNet.Identity
+﻿
 @if (Session["id"] != null)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -9,6 +9,7 @@
             <li>
                 @Html.ActionLink("Hello " + Session["name"].ToString() + "!", "Settings", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
             </li>
+            <li>@Html.ActionLink(""+Session["Money"] +"","index","manage")</li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
         </ul>
     }

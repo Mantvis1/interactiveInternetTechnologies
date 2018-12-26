@@ -77,8 +77,10 @@ namespace WebApplication1.Controllers
                 int userMoney = DB.getMoneyById((int)Session["id"]);
                 if (userMoney >= cost)
                 {
+                    int moneyLeft = userMoney - cost;
                     DB.insertPlayerToUser((int)Session["id"], playerId);
-                    DB.updateUserMoney((int)Session["id"], userMoney - cost);
+                    DB.updateUserMoney((int)Session["id"], moneyLeft);
+                    Session["money"] = moneyLeft;
                 }
             }
             else
@@ -94,7 +96,12 @@ namespace WebApplication1.Controllers
             bool isDeleted = DB.DeletePlayerById(playerId, (int)Session["id"]);
             if (isDeleted == true)
             {
-
+                PlayerViewModel player = new PlayerViewModel(playerId, "", 0, PDB.getEffById(playerId));
+                double money = DB.getMoneyById((int)Session["id"]);
+                double cost = player.getCost();
+                double moneyLeft = money + cost;
+                DB.updateUserMoney((int)Session["id"], (Convert.ToInt32(moneyLeft)));
+                Session["money"] = moneyLeft;
             }
             else
             {
