@@ -71,5 +71,15 @@ namespace WebApplication1.DbContext
             }
             return message;
         }
+
+        public void addNewMessage(int userId, string message, double cost)
+        {
+            databaseConnection.Open();
+            query = "INSERT INTO message(id, userId, messageId, time, money) VALUES (NULL," + userId + ",'" + message + "','" + DateTime.Now + "'," + cost + ")";
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            MySqlDataReader reader = commandDatabase.ExecuteReader();
+            databaseConnection.Close();
+
+        }
     }
 }

@@ -15,6 +15,7 @@ namespace WebApplication1.Controllers
         PlayerDB PDB = new PlayerDB();
         private int numberInPage = 10;
         List<PlayerViewModel> localPlayers = new List<PlayerViewModel>();
+        MessageDB MDB = new MessageDB();
 
         [HttpGet]
         public ActionResult Market()
@@ -81,6 +82,8 @@ namespace WebApplication1.Controllers
                     DB.insertPlayerToUser((int)Session["id"], playerId);
                     DB.updateUserMoney((int)Session["id"], moneyLeft);
                     Session["money"] = moneyLeft;
+                    string message = MDB.GetMessageTypeById(1);
+                    MDB.addNewMessage((int)Session["id"], message, cost);
                 }
             }
             else

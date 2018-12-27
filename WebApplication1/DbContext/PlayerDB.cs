@@ -143,7 +143,7 @@ namespace WebApplication1.DbContext
         {
             List<PlayerModel> Player = new List<PlayerModel>();
             databaseConnection.Open();
-            query = "SELECT * FROM Player"; //  test -> limit 35" ;
+            query = "SELECT * FROM Player limit 35"; //  test -> limit 35" ;
             MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
             MySqlDataReader reader = commandDatabase.ExecuteReader();
             if (reader.HasRows)
