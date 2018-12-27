@@ -20,7 +20,7 @@ namespace WebApplication1.Controllers
         {
             if (newPassword == repeatNewPassword)
             {
-                if (MDB.UpdatePassword() == true)
+                if (MDB.UpdatePassword((int)Session["id"], newPassword) == true)
                 {
                     Session["error"] = "Sekmingai paskeistas slaptažodis";
                 }
@@ -28,7 +28,8 @@ namespace WebApplication1.Controllers
                 {
                     Session["error"] = "Klaida pakeičiant slaptažodį";
                 }
-            }else
+            }
+            else
             {
                 Session["error"] = "Skiriasi ivesti slaptazodziai";
             }
@@ -38,8 +39,9 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult ChangeUsername(string newUserName, string password)
         {
-            if(MDB.UpdateUsername() == true)
+            if (MDB.isUserExists((int)Session["id"], password) == true)
             {
+                MDB.UpdateUsername((int)Session["id"], newUserName);
                 Session["error"] = "Sekmingai paskeistas vartotojo vardas";
             }
             else
@@ -52,8 +54,9 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult ChangeEmail(string oldEmail, string newEmail, string password)
         {
-            if(MDB.UpdateEmail() == true)
+            if (MDB.isUserExists((int)Session["id"], password) == true)
             {
+                MDB.UpdateEmail((int)Session["id"], newEmail);
                 Session["error"] = "Sekmingai paskeistas pastas";
             }
             else
@@ -63,19 +66,20 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Settings");
         }
 
-       // [HttpDelete]
-        public ActionResult DeleteAccount()
+        // [HttpDelete]
+        public ActionResult DeleteAccount(string password)
         {
-            if (MDB.DeleteAccount() == true)
+            if (MDB.isUserExists((int)Session["id"], password) == true)
             {
+                MDB.DeleteAccount((int)Session["id"]);
                 Session.Clear();
                 return RedirectToAction("About", "Home");
-            } else
+            }
+            else
             {
                 Session["error"] = "Nepavyko ištrinti paskyros";
                 return RedirectToAction("Settings");
             }
-           
         }
     }
 }

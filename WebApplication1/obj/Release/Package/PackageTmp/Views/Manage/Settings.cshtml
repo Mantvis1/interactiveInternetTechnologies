@@ -3,43 +3,47 @@
     ViewBag.Title = "Settings";
     Layout = "~/Views/Shared/_LayoutAfterLogin.cshtml";
 }
-
+@if (ViewBag.ErrorMessage != null)
+{
+    <h3 class="btn-danger">@ViewBag.ErrorMessage</h3>
+}
 <h2>Settings</h2>
-<form method="post">
+<form action="/Manage/ChangePassword" method="post">
     <fieldset>
         <legend>Slaptazodzio keitimas</legend>
-        Įveskite seną slaptažodi: <input type="password" name="oldPassword" /> <br />
-        Įveskite naują slaptažodi: <input type="password" name="newPassword" /><br />
-        Pakartokite naują slaptažodi: <input type="password" name="repeatNewPassword" /><br />
+        Įveskite seną slaptažodi: <input type="password" name="oldPassword" required /> <br />
+        Įveskite naują slaptažodi: <input type="password" name="newPassword" required/><br />
+        Pakartokite naują slaptažodi: <input type="password" name="repeatNewPassword" required/><br />
         <button type="submit" class="btn btn-info">Keisti</button>
     </fieldset>
 </form>
 <br />
 <br />
-<form>
+<form action="/Manage/ChangeEmail" method="post">
     <fieldset>
         <legend>Email keitimas</legend>
-        Įveskite seną email: <input type="email" name="oldEmail" /><br />
-        Įveskite naują email: <input type="email" name="newEmail" /><br />
-        Įveskite slaptažodį <input type="email" name="password" /><br />
+        Įveskite seną email: <input type="email" name="oldEmail" required/><br />
+        Įveskite naują email: <input type="email" name="newEmail" required/><br />
+        Įveskite slaptažodį <input type="password" name="password" required/><br />
         <button type="submit" class="btn btn-info">Keisti</button>
     </fieldset>
 </form>
 <br />
 <br />
-<form>
+<form action="/Manage/ChangeUsername" method="post">
     <fieldset>
         <legend>Paskyros vardo keitimas</legend>
-        Naujas vardas:<input type="text" name="newUserName" /> <br />
-        Slaptazodis: <input type="password" name="password" /> <br />
+        Naujas vardas:<input type="text" name="newUserName" required /> <br />
+        Slaptazodis: <input type="password" name="password" required/> <br />
         <button type="submit" class="btn btn-info">Keisti</button>
     </fieldset>
 </form>
 <br />
 <br />
-<form method="delete">
+<form action="/Manage/DeleteAccount" method="delete">
     <fieldset>
         <legend>Paskyros salinimas</legend>
+        Slaptazodis: <input type="password" name="password" required /> <br />
         <button type="submit" class="btn btn-danger">salinti</button>
     </fieldset>
 </form>
