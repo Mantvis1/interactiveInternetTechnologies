@@ -1,8 +1,26 @@
-﻿
+﻿@model IEnumerable<WebApplication1.Models.MessageModel>
 @{
     ViewBag.Title = "Messages";
     Layout = "~/Views/Shared/_LayoutAfterLogin.cshtml";
 }
 
-<h2>Messages</h2>
+<table class="invisibleTableBorders">
+    <tr>
+    <th>Laikas</th>
+    <th>Tekstas</th>
+    <th>Salinti</th>
+    </tr>
+        
+
+    <tr>
+        @foreach (var message in Model)
+        {
+            <td>@message.date</td>
+            <td>@message.text</td>
+            <td>
+                ???
+            </td>
+        }
+    </tr>
+</table>
 

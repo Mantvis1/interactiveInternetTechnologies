@@ -13,6 +13,7 @@ namespace WebApplication1.Controllers
         GameDB game = new GameDB();
         RankingDB ranking = new RankingDB();
         UserDB DB = new UserDB();
+        MessageDB MDB = new MessageDB();
 
         [HttpGet]
         public ActionResult GameSelection()
@@ -46,7 +47,8 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult Messages()
         {
-            return View();
+            List<MessageModel> messages = MDB.getAllUserMessages((int)Session["id"]);
+            return View(messages);
         }
 
         
