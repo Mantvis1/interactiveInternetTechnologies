@@ -9,10 +9,10 @@ namespace WebApplication1.Models
     {
         public int userId { get; set; }
         public string text { get; set; }
-        public DateTime date { get; set; }
+        public string date { get; set; }
         public double money { get; set; }
 
-        public MessageViewModel(int id, int userId, string text, DateTime date, double money) : base(id)
+        public MessageViewModel(int id, int userId, string text, string date, double money) : base(id)
         {
             this.userId = userId;
             this.text = text;

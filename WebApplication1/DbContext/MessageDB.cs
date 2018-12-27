@@ -24,7 +24,7 @@ namespace WebApplication1.DbContext
                 {
                     while (reader.Read())
                     {
-                        MessageModel model = new MessageModel(reader.GetInt32(0), reader.GetInt32(1), reader.GetInt32(2), reader.GetDateTime(3), reader.GetDouble(4));
+                        MessageModel model = new MessageModel(reader.GetInt32(0), reader.GetInt32(1), reader.GetInt32(2), reader.GetString(3), reader.GetDouble(4));
                         messages.Add(model);
                     }
                 }
@@ -72,10 +72,11 @@ namespace WebApplication1.DbContext
             return message;
         }
 
-        public void addNewMessage(int userId, string message, double cost)
+        public void addNewMessage(int userId, int messageId, double cost)
         {
             databaseConnection.Open();
-            query = "INSERT INTO message(id, userId, messageId, time, money) VALUES (NULL," + userId + ",'" + message + "','" + DateTime.Now + "'," + cost + ")";
+            string time = Convert.ToString(DateTime.Now);
+            query = "INSERT INTO message(id, userId, messageId, time, money) VALUES (NULL," + userId + "," + messageId + ",'" + time + "'," + cost + ")";
             MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
             MySqlDataReader reader = commandDatabase.ExecuteReader();
             databaseConnection.Close();

@@ -82,8 +82,7 @@ namespace WebApplication1.Controllers
                     DB.insertPlayerToUser((int)Session["id"], playerId);
                     DB.updateUserMoney((int)Session["id"], moneyLeft);
                     Session["money"] = moneyLeft;
-                    string message = MDB.GetMessageTypeById(1);
-                    MDB.addNewMessage((int)Session["id"], message, cost);
+                    MDB.addNewMessage((int)Session["id"], 1, cost);
                 }
             }
             else

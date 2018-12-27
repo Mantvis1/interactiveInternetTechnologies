@@ -19,11 +19,11 @@
             <td>@message.text</td>
             @if (message.money > 0)
             {
-                <td> green @message.money</td>
+                <td> @message.money</td>
             }
-            else if (message.money < 0)
+            else if (message.money <= 0)
             {
-                <td> red @message.money</td>
+                <td> @message.money</td>
             }
             <td>
                 <form action="/Game/DeleteSelectedMessage" method="post">

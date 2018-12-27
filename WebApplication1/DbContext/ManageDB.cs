@@ -93,7 +93,8 @@ namespace WebApplication1.DbContext
         public void addNewMessage(int userId, string message, double cost)
         {
             databaseConnection.Open();
-            query = "INSERT INTO message(id, userId, messageId, time, money) VALUES (NULL,"+userId+",'"+message+"','"+DateTime.Now+"',"+cost+")";
+            string time = Convert.ToString(DateTime.Now);
+            query = "INSERT INTO message(id, userId, messageId, time, money) VALUES (NULL,"+userId+",'"+message+"','"+time+"',"+cost+")";
             MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
             MySqlDataReader reader = commandDatabase.ExecuteReader();
             databaseConnection.Close();
