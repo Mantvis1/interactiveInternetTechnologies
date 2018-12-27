@@ -42,6 +42,13 @@ namespace WebApplication1.Controllers
             return View(listOfRanks);
         }
 
+
+        [HttpGet]
+        public ActionResult Messages()
+        {
+            return View();
+        }
+
         
     }
 }

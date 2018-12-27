@@ -266,6 +266,7 @@
     <Content Include="Views\Player\MyTeam.cshtml" />
     <Content Include="Views\Game\Ranking.cshtml" />
     <Content Include="Views\Manage\Settings.cshtml" />
+    <Content Include="Views\Game\Messages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
