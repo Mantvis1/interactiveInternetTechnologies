@@ -198,6 +198,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="DbContext\ManageDB.cs" />
     <Compile Include="Models\PagedViewModel.cs" />
     <Compile Include="Controllers\PlayerManagerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

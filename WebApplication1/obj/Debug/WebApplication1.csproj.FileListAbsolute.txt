@@ -164,3 +164,4 @@ C:\Users\Mantvydas\Desktop\KTU\5 semestras\Interaktyvios interneto technologijos
 C:\Users\Mantvydas\Desktop\KTU\5 semestras\Interaktyvios interneto technologijos\Project\WebApplication1\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\Mantvydas\Desktop\KTU\5 semestras\Interaktyvios interneto technologijos\Project\WebApplication1\obj\Debug\WebApplication1.dll
 C:\Users\Mantvydas\Desktop\KTU\5 semestras\Interaktyvios interneto technologijos\Project\WebApplication1\obj\Debug\WebApplication1.pdb
+C:\Users\Mantvydas\Desktop\KTU\5 semestras\Interaktyvios interneto technologijos\Project\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache
