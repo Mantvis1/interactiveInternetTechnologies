@@ -42,6 +42,7 @@ namespace WebApplication1.Controllers
             if (MDB.isUserExists((int)Session["id"], password) == true)
             {
                 MDB.UpdateUsername((int)Session["id"], newUserName);
+                Session["name"] = newUserName;
                 Session["error"] = "Sekmingai paskeistas vartotojo vardas";
             }
             else
