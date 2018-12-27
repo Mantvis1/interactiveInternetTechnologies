@@ -201,6 +201,7 @@
     <Compile Include="DbContext\ManageDB.cs" />
     <Compile Include="DbContext\MessageDB.cs" />
     <Compile Include="Models\MessageModel.cs" />
+    <Compile Include="Models\MessageViewModel.cs" />
     <Compile Include="Models\PagedViewModel.cs" />
     <Compile Include="Controllers\PlayerManagerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

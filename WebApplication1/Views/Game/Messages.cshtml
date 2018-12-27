@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebApplication1.Models.MessageModel>
+﻿@model IEnumerable<WebApplication1.Models.MessageViewModel>
 @{
     ViewBag.Title = "Messages";
     Layout = "~/Views/Shared/_LayoutAfterLogin.cshtml";
@@ -6,21 +6,35 @@
 
 <table class="invisibleTableBorders">
     <tr>
-    <th>Laikas</th>
-    <th>Tekstas</th>
-    <th>Salinti</th>
+        <th>Laikas</th>
+        <th>Tekstas</th>
+        <th>Pinigai</th>
+        <th>Salinti</th>
     </tr>
-        
 
-    <tr>
-        @foreach (var message in Model)
-        {
+    @foreach (var message in Model)
+    {
+        <tr>
             <td>@message.date</td>
             <td>@message.text</td>
+            @if (message.money > 0)
+            {
+                <td> green @message.money</td>
+            }
+            else if (message.money < 0)
+            {
+                <td> red @message.money</td>
+            }
             <td>
-                ???
+                <form action="/Game/DeleteSelectedMessage" method="post">
+                    <input readonly type="text" class="hidden" value="@message.ID" name="messageId" />
+                    <button type="submit" class="btn-default">Trinti</button>
+                </form>
             </td>
-        }
-    </tr>
+        </tr>
+    }
 </table>
+<form action="/Game/DeleteAllMessages" method="post">
+    <button type="submit" class="btn-danger">Trinti viska</button>
+</form>
 

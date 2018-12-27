@@ -23,7 +23,7 @@ namespace WebApplication1.Controllers
             return View(countOfPlayerInTournament);
         }
 
-       // [HttpPost]
+        // [HttpPost]
         public ActionResult RegisterNewCompetotor()
         {
             bool registrationSuccess = game.CreateNewCompetotor((int)Session["id"]);
@@ -47,10 +47,38 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult Messages()
         {
-            List<MessageModel> messages = MDB.getAllUserMessages((int)Session["id"]);
+            List<MessageViewModel> messages = getUpdatedListOfMessages();
             return View(messages);
         }
 
-        
+        [HttpPost]
+        public ActionResult DeleteSelectedMessage(int? messageId)
+        {
+            if (messageId != null)
+            {
+                MDB.deleteMessageById(Convert.ToInt32(messageId));
+            }
+            return RedirectToAction("Messages");
+        }
+
+        [HttpPost]
+        public ActionResult DeleteAllMessages()
+        {
+            MDB.deleteAllMessages((int)Session["id"]);
+            return RedirectToAction("Messages");
+        }
+
+        private List<MessageViewModel> getUpdatedListOfMessages()
+        {
+            List<MessageModel> messages = MDB.getAllUserMessages((int)Session["id"]);
+            List<MessageViewModel> updatedList = new List<MessageViewModel>();
+            foreach(var message in messages)
+            {
+                updatedList.Add(new MessageViewModel(message.ID, message.userId, MDB.GetMessageTypeById(message.messageId), message.date, message.money));
+            }
+            return updatedList;
+        }
     }
+
+    
 }
