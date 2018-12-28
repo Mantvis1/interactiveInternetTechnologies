@@ -14,11 +14,16 @@ namespace WebApplication1.Controllers
         RankingDB ranking = new RankingDB();
         UserDB DB = new UserDB();
         MessageDB MDB = new MessageDB();
+        
 
         [HttpGet]
         public ActionResult GameSelection()
         {
             int countOfPlayerInTournament = game.CountOfTournamentPlayer();
+            if(countOfPlayerInTournament == 8)  // == 8
+            {
+                TournamentManageController tournament = new TournamentManageController();
+            }
             ViewBag.Message = countOfPlayerInTournament;
             return View(countOfPlayerInTournament);
         }

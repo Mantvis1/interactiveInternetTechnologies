@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebApplication1.Models;
 
 namespace WebApplication1.DbContext
 {
@@ -75,6 +76,42 @@ namespace WebApplication1.DbContext
             MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
             MySqlDataReader reader = commandDatabase.ExecuteReader();
             databaseConnection.Close();
+        }
+
+        public List<int> getAllUsersOfTournament()
+        {
+            List<int> users = new List<int>();
+            databaseConnection.Open();
+            query = "Select userId from tournament";
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            MySqlDataReader reader = commandDatabase.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    users.Add(reader.GetInt32(0));
+                }
+            }
+            databaseConnection.Close();
+            return users;
+        }
+
+        public int? getAllPointsForUserById(int id)
+        {
+            int? points = 0;
+            databaseConnection.Open();
+            query = "SELECT SUM(points) FROM playerinfo WHERE playerId IN (SELECT playerId from userplayer WHERE userId = " + id + ")";
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            MySqlDataReader reader = commandDatabase.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    points = reader.GetInt32(0);
+                }
+            }
+            databaseConnection.Close();
+            return points;
         }
     }
 }

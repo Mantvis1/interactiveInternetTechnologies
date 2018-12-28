@@ -17,13 +17,17 @@
         <tr>
             <td>@message.date</td>
             <td>@message.text</td>
-            @if (message.money > 0)
+            @if (message.money < 0)
             {
-                <td> @message.money</td>
+                <td><div class="text-danger">@message.money</div></td>
             }
-            else if (message.money <= 0)
+            else if (message.money > 0)
             {
-                <td> @message.money</td>
+                <td><div class="text-success">@message.money</div></td>
+            }
+            else
+            {
+                <td><div class="text-info">message.money</div></td>
             }
             <td>
                 <form action="/Game/DeleteSelectedMessage" method="post">
