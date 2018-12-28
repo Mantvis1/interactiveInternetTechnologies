@@ -230,7 +230,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/17/2018 10:42:52</publishTime>
     </File>
     <File Include="Views/Game/Messages.cshtml">
-      <publishTime>12/28/2018 14:56:58</publishTime>
+      <publishTime>12/28/2018 20:41:12</publishTime>
     </File>
     <File Include="Views/Game/Ranking.cshtml">
       <publishTime>12/28/2018 17:07:32</publishTime>
