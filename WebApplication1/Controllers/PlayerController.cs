@@ -60,7 +60,6 @@ namespace WebApplication1.Controllers
             {
                 players.Add(new PlayerViewModel(id, PDB.getPlayerById(id), PDB.getPlayerPointsById(id), 0));
             }
-            players.OrderBy(x => x.Points);
             return View(players);
         }
 
@@ -82,7 +81,7 @@ namespace WebApplication1.Controllers
                     DB.insertPlayerToUser((int)Session["id"], playerId);
                     DB.updateUserMoney((int)Session["id"], moneyLeft);
                     Session["money"] = moneyLeft;
-                    MDB.addNewMessage((int)Session["id"], 1, cost);
+                    MDB.addNewMessage((int)Session["id"], 1, -cost);
                 }
             }
             else
@@ -104,6 +103,7 @@ namespace WebApplication1.Controllers
                 double moneyLeft = money + cost;
                 DB.updateUserMoney((int)Session["id"], (Convert.ToInt32(moneyLeft)));
                 Session["money"] = moneyLeft;
+                MDB.addNewMessage((int)Session["id"], 2, cost);
             }
             else
             {
