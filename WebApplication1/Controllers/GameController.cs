@@ -44,7 +44,7 @@ namespace WebApplication1.Controllers
 
         public ActionResult Ranking()
         {
-            List<RankingModel> listOfRanks = ranking.getAllRankings(0, 1000);
+            List<RankingModel> listOfRanks = ranking.getAllRankings();
             return View(listOfRanks);
         }
 
