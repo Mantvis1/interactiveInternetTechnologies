@@ -113,5 +113,14 @@ namespace WebApplication1.DbContext
             databaseConnection.Close();
             return points;
         }
+
+        public void ClearTournamentTable()
+        {
+            databaseConnection.Open();
+            query = "TRUNCATE TABLE tournament";
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            MySqlDataReader reader = commandDatabase.ExecuteReader();
+            databaseConnection.Close();
+        }
     }
 }

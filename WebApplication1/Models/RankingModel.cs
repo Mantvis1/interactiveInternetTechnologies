@@ -17,6 +17,10 @@
             this.Value = Value;
         }
 
+        public RankingModel()
+        {
+        }
+
         public int AllGames()
         {
             return Win + Lose;

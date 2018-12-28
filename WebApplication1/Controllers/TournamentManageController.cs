@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.DbContext;
+using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
@@ -12,6 +13,7 @@ namespace WebApplication1.Controllers
         GameDB GDB = new GameDB();
         MessageDB MDB = new MessageDB();
         UserDB UDB = new UserDB();
+        RankingDB RDB = new RankingDB();
 
         public TournamentManageController()
         {
@@ -51,52 +53,39 @@ namespace WebApplication1.Controllers
                 users.RemoveAt(index);
             }
 
-            List<Tuple<int,int>> top4 = new List<Tuple<int, int>>();
+            List<Tuple<int, int>> top4 = new List<Tuple<int, int>>();
+            List<Tuple<int, int>> last4 = new List<Tuple<int, int>>();
             for (int i = 0; i < halfOfUsersCount; i++)
             {
                 if (groupA[i].Item2 > groupB[i].Item2)
                 {
-                    top4.Add(new Tuple<int,int>(groupA[i].Item1,groupA[i].Item2));
+                    top4.Add(new Tuple<int, int>(groupA[i].Item1, groupA[i].Item2));
+                    last4.Add(new Tuple<int, int>(groupB[i].Item1, groupB[i].Item2));
                 }
                 else if (groupA[i].Item2 < groupB[i].Item2)
                 {
                     top4.Add(new Tuple<int, int>(groupB[i].Item1, groupB[i].Item2));
+                    last4.Add(new Tuple<int, int>(groupA[i].Item1, groupA[i].Item2));
                 }
                 else
                 {
                     top4.Add(new Tuple<int, int>(groupA[i].Item1, groupA[i].Item2));
+                    last4.Add(new Tuple<int, int>(groupB[i].Item1, groupB[i].Item2));
                 }
             }
 
+            top4 = getRanks(top4);
+            last4 = getRanks(last4);
 
-            for (int i = 1; i <= halfOfUsersCount/2; i++)
-            {
-                if(top4[i-1].Item2 < top4[top4.Count - i].Item2)
-                {
-                    Tuple<int, int> temp = top4[top4.Count - i];
-                    top4[top4.Count - i] = top4[i-1];
-                    top4[i - 1] = temp;
-                }
-            }
-            int userIndex = 0;
-            for (int i = 1; i <= halfOfUsersCount / 2; i++)
-            {
-                if (top4[userIndex].Item2 < top4[userIndex+1].Item2)
-                {
-                    Tuple<int, int> temp = top4[userIndex+1];
-                    top4[userIndex+1] = top4[userIndex];
-                    top4[userIndex] = temp;
-                    
-                }
-                userIndex = +2;
-            }
+            SendMessagesAndAddPrizes(top4, 1000);
+            SendMessagesAndAddPrizes(last4, 100);
 
-            SendMessagesAndAddPrizes(top4);
+            UpdateUserWonAndLostTable(top4, last4);
+            clearTournamentTable();
         }
 
-        private void SendMessagesAndAddPrizes(List<Tuple<int, int>> top4)
+        private void SendMessagesAndAddPrizes(List<Tuple<int, int>> top4, int prize)
         {
-            int prize = 1000;
             for (int i = 0; i < top4.Count; i++)
             {
                 MDB.addNewMessage(top4[i].Item1, 3, Convert.ToInt32(prize));
@@ -104,7 +93,78 @@ namespace WebApplication1.Controllers
                 UDB.updateUserMoney(top4[i].Item1, Convert.ToInt32(money + prize));
                 prize /= 2;
             }
-          //  Session["money"] = UDB.getMoneyById((int)Session["id"]);
+        }
+
+        private void clearTournamentTable()
+        {
+            GDB.ClearTournamentTable();
+        }
+
+        private void UpdateUserWonAndLostTable(List<Tuple<int, int>> top4, List<Tuple<int, int>> last4)
+        {
+            for (int i = 0; i < top4.Count; i++)
+            {
+                if (i == 0)
+                {
+                    RankingModel rank = RDB.getUserRankinsById(top4[i].Item1);
+                    RDB.updateRankings(top4[i].Item1, rank.Win + 3, rank.Lose);
+                }
+                else if (i == 1 || i == 2)
+                {
+                    RankingModel rank = RDB.getUserRankinsById(top4[i].Item1);
+                    RDB.updateRankings(top4[i].Item1, rank.Win + 2, rank.Lose + 1);
+                }
+                else if (i == 3)
+                {
+                    RankingModel rank = RDB.getUserRankinsById(top4[i].Item1);
+                    RDB.updateRankings(top4[i].Item1, rank.Win + 1, rank.Lose + 2);
+                }
+            }
+
+            for (int i = 0; i < top4.Count; i++)
+            {
+                if (i == 0)
+                {
+                    RankingModel rank = RDB.getUserRankinsById(top4[i].Item1);
+                    RDB.updateRankings(top4[i].Item1, rank.Win + 2, rank.Lose + 1);
+                }
+                else if (i == 1 || i == 2)
+                {
+                    RankingModel rank = RDB.getUserRankinsById(top4[i].Item1);
+                    RDB.updateRankings(top4[i].Item1, rank.Win + 1, rank.Lose + 2);
+                }
+                else if (i == 3)
+                {
+                    RankingModel rank = RDB.getUserRankinsById(top4[i].Item1);
+                    RDB.updateRankings(top4[i].Item1, rank.Win, rank.Lose + 3);
+                }
+            }
+        }
+
+        private List<Tuple<int, int>> getRanks(List<Tuple<int, int>> rank)
+        {
+            for (int i = 1; i <= rank.Count/2; i++)
+            {
+                if (rank[i - 1].Item2 < rank[rank.Count - i].Item2)
+                {
+                    Tuple<int, int> temp = rank[rank.Count - i];
+                    rank[rank.Count - i] = rank[i - 1];
+                    rank[i - 1] = temp;
+                }
+            }
+            int userIndex = 0;
+            for (int i = 1; i <= rank.Count / 2; i++)
+            {
+                if (rank[userIndex].Item2 < rank[userIndex + 1].Item2)
+                {
+                    Tuple<int, int> temp = rank[userIndex + 1];
+                    rank[userIndex + 1] = rank[userIndex];
+                    rank[userIndex] = temp;
+
+                }
+                userIndex = +2;
+            }
+            return rank;
         }
 
     }
