@@ -16,6 +16,7 @@ namespace WebApplication1.Controllers
         private int numberInPage = 10;
         List<PlayerViewModel> localPlayers = new List<PlayerViewModel>();
         MessageDB MDB = new MessageDB();
+        TeamCostController teamCost = new TeamCostController();
 
         [HttpGet]
         public ActionResult Market()
@@ -82,6 +83,7 @@ namespace WebApplication1.Controllers
                     DB.updateUserMoney((int)Session["id"], moneyLeft);
                     Session["money"] = moneyLeft;
                     MDB.addNewMessage((int)Session["id"], 1, -cost);
+                    teamCost.GetTeamCost((int)Session["id"]);
                 }
             }
             else
@@ -104,6 +106,7 @@ namespace WebApplication1.Controllers
                 DB.updateUserMoney((int)Session["id"], (Convert.ToInt32(moneyLeft)));
                 Session["money"] = moneyLeft;
                 MDB.addNewMessage((int)Session["id"], 2, cost);
+                teamCost.GetTeamCost((int)Session["id"]);
             }
             else
             {

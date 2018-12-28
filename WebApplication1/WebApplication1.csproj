@@ -198,6 +198,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TeamCostController.cs" />
     <Compile Include="Controllers\TournamentManageController.cs" />
     <Compile Include="DbContext\ManageDB.cs" />
     <Compile Include="DbContext\MessageDB.cs" />
@@ -275,6 +276,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Constants\" />
+    <Folder Include="Views\TeamCost\" />
     <Folder Include="Views\TournamentManage\" />
   </ItemGroup>
   <ItemGroup>

@@ -135,6 +135,7 @@ namespace WebApplication1.DbContext
                     Player.Add(reader.GetInt32(0));
                 }
             }
+            databaseConnection.Close();
             return Player;
         }
         public bool DeletePlayerById(int playerId, int userId)
@@ -201,6 +202,15 @@ namespace WebApplication1.DbContext
         {
             databaseConnection.Open();
             query = "UPDATE user SET money =" + result + " WHERE id =" + id;
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            MySqlDataReader reader = commandDatabase.ExecuteReader();
+            databaseConnection.Close();
+        }
+
+        public void updateUserTeamValue(int id, double value)
+        {
+            databaseConnection.Open();
+            query = "UPDATE rankings SET value =" + value + " WHERE userId =" + id;
             MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
             MySqlDataReader reader = commandDatabase.ExecuteReader();
             databaseConnection.Close();
