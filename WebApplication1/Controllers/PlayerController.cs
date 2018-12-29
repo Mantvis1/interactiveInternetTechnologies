@@ -101,7 +101,7 @@ namespace WebApplication1.Controllers
             {
                 PlayerViewModel player = new PlayerViewModel(playerId, "", 0, PDB.getEffById(playerId));
                 double money = DB.getMoneyById((int)Session["id"]);
-                double cost = player.getCost();
+                double cost = player.getCost(1);
                 double moneyLeft = money + cost;
                 DB.updateUserMoney((int)Session["id"], (Convert.ToInt32(moneyLeft)));
                 Session["money"] = moneyLeft;

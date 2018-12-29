@@ -13,11 +13,11 @@
     {
         <tr>
             <td>@player.Name</td>
-            <td>@player.getCost()</td>
+            <td>@player.getCost(0)</td>
             <td>
                 <form action="/Player/BuyPlayer" method="post">
                     <input type="hidden" name="playerId" value="@player.ID" readonly />
-                    <input type="hidden" name="cost" value="@player.getCost()" readonly />
+                    <input type="hidden" name="cost" value="@player.getCost(0)" readonly />
                     <button>Pirkti</button>
                 </form>
             </td>

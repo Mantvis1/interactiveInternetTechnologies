@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using WebApplication1.DbContext;
+using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
@@ -20,7 +21,8 @@ namespace WebApplication1.Controllers
             List<int> player = UDB.getUserPlayerIdList(id);
             foreach (var item in player)
             {
-                cost += PDB.getEffById(item) * 500;
+                PlayerViewModel playerEff = new PlayerViewModel(item, "",0, PDB.getEffById(item));
+                cost += playerEff.getCost(0);
             }
 
             UDB.updateUserTeamValue(id, cost);
