@@ -19,6 +19,10 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult GameSelection()
         {
+            if (Session["id"] == null)
+            {
+                return RedirectToAction("About", "Home");
+            }
             int countOfPlayerInTournament = game.CountOfTournamentPlayer();
             if(Session["error"] != null)
             {
@@ -51,6 +55,10 @@ namespace WebApplication1.Controllers
 
         public ActionResult Ranking()
         {
+            if (Session["id"] == null)
+            {
+                return RedirectToAction("About", "Home");
+            }
             List<RankingModel> listOfRanks = ranking.getAllRankings();
             return View(listOfRanks);
         }
@@ -59,6 +67,10 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult Messages()
         {
+            if (Session["id"] == null)
+            {
+                return RedirectToAction("About", "Home");
+            }
             List<MessageViewModel> messages = getUpdatedListOfMessages();
             return View(messages);
         }

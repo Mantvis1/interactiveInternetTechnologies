@@ -21,6 +21,10 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult Market()
         {
+            if(Session["id"] == null)
+            {
+                return RedirectToAction("About", "Home");
+            }
             if(Session["error"] != null)
             {
                 ViewBag.Error = Session["error"];
@@ -60,6 +64,10 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult MyTeam()
         {
+            if (Session["id"] == null)
+            {
+                return RedirectToAction("About", "Home");
+            }
             List<int> playerId = DB.getUserPlayerIdList((int)Session["id"]);
             List<PlayerViewModel> players = new List<PlayerViewModel>();
             foreach (int id in playerId)

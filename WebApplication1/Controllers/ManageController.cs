@@ -10,6 +10,10 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult Settings()
         {
+            if (Session["id"] == null)
+            {
+                return RedirectToAction("About", "Home");
+            }
             ViewBag.ErrorMessage = Session["error"];
             Session["error"] = null;
             return View();
