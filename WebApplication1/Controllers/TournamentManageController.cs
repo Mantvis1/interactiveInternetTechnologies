@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.DbContext;
@@ -17,7 +18,7 @@ namespace WebApplication1.Controllers
 
         public TournamentManageController()
         {
-            execute();
+            Task.Run(() => execute());
         }
 
         private void execute()

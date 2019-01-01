@@ -7,3 +7,7 @@
 <h2>GameSelection</h2>
 <div>Jau užsiregistravo @ViewBag.Message dalyvių</div>
 <button type="button" onclick="location.href='@Url.Action("RegisterNewCompetotor", "Game")'">Registruotis</button> 
+@if(ViewBag.Error != null)
+{
+    <div>@ViewBag.Error</div>
+}

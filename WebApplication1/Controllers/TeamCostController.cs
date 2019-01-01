@@ -10,7 +10,7 @@ namespace WebApplication1.Controllers
         UserDB UDB = new UserDB();
         PlayerDB PDB = new PlayerDB();
 
-       public TeamCostController()
+        public TeamCostController()
         {
 
         }
@@ -21,12 +21,11 @@ namespace WebApplication1.Controllers
             List<int> player = UDB.getUserPlayerIdList(id);
             foreach (var item in player)
             {
-                PlayerViewModel playerEff = new PlayerViewModel(item, "",0, PDB.getEffById(item));
+                PlayerViewModel playerEff = new PlayerViewModel(item, "", 0, PDB.getEffById(item));
                 cost += playerEff.getCost(0);
             }
-
             UDB.updateUserTeamValue(id, cost);
         }
-      
+
     }
 }

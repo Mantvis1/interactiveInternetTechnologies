@@ -215,5 +215,29 @@ namespace WebApplication1.DbContext
             MySqlDataReader reader = commandDatabase.ExecuteReader();
             databaseConnection.Close();
         }
+
+        public bool isUserHaveAtLeastOnePlayer(int id)
+        {
+            int count = 0;
+            databaseConnection.Open();
+            query = "SELECT COUNT(id) FROM userplayer WHERE userId =" + id;
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            MySqlDataReader reader = commandDatabase.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    count = reader.GetInt32(0);
+                }
+            }
+            databaseConnection.Close();
+            if(count > 0)
+            {
+                return true;
+            }else
+            {
+                return false;
+            }
+        }
     }
 }

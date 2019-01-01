@@ -14,15 +14,21 @@ namespace WebApplication1.Controllers
         RankingDB ranking = new RankingDB();
         UserDB DB = new UserDB();
         MessageDB MDB = new MessageDB();
-        
+
 
         [HttpGet]
         public ActionResult GameSelection()
         {
             int countOfPlayerInTournament = game.CountOfTournamentPlayer();
-            if(countOfPlayerInTournament == 8)  // == 8
+            if(Session["error"] != null)
+            {
+                ViewBag.Error = Session["error"];
+                Session["error"] = null;
+            }
+            if (countOfPlayerInTournament == 8)
             {
                 TournamentManageController tournament = new TournamentManageController();
+                ViewBag.Error = "Turnyras vyksta. Apie rezultatus bus pranesta zinute";
             }
             ViewBag.Message = countOfPlayerInTournament;
             return View(countOfPlayerInTournament);
@@ -31,15 +37,16 @@ namespace WebApplication1.Controllers
         // [HttpPost]
         public ActionResult RegisterNewCompetotor()
         {
-            bool registrationSuccess = game.CreateNewCompetotor((int)Session["id"]);
-            if (registrationSuccess == true)
+            bool isUserHavePlayers = DB.isUserHaveAtLeastOnePlayer((int)Session["id"]);
+            if (isUserHavePlayers == true)
             {
-                return RedirectToAction("GameSelection");
+                bool registrationSuccess = game.CreateNewCompetotor((int)Session["id"]);
             }
             else
             {
-                return RedirectToAction("GameSelection"); // Error message
+                Session["error"] = "Prieš registruojantis į turnyrą reikia turėti bent 1 žaidėją!";
             }
+            return RedirectToAction("GameSelection");
         }
 
         public ActionResult Ranking()
@@ -77,7 +84,7 @@ namespace WebApplication1.Controllers
         {
             List<MessageModel> messages = MDB.getAllUserMessages((int)Session["id"]);
             List<MessageViewModel> updatedList = new List<MessageViewModel>();
-            foreach(var message in messages)
+            foreach (var message in messages)
             {
                 updatedList.Add(new MessageViewModel(message.ID, message.userId, MDB.GetMessageTypeById(message.messageId), message.date, message.money));
             }
@@ -85,5 +92,5 @@ namespace WebApplication1.Controllers
         }
     }
 
-    
+
 }
