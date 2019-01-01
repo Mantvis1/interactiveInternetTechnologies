@@ -155,13 +155,13 @@ namespace WebApplication1.DbContext
             }
         }
 
-        public int isUserHavePlayerById(int playerId)
+        public int isUserHavePlayerById(int userId, int playerId)
         {
             if (playerId >= 0)
             {
                 int count = -1;
                 databaseConnection.Open();
-                query = "SELECT Count(id) FROM userplayer WHERE `playerId`=" + playerId;
+                query = "SELECT Count(id) FROM userplayer WHERE playerId=" + playerId + " and userId = " + userId;
                 MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
                 MySqlDataReader reader = commandDatabase.ExecuteReader();
                 if (reader.HasRows)
@@ -231,10 +231,11 @@ namespace WebApplication1.DbContext
                 }
             }
             databaseConnection.Close();
-            if(count > 0)
+            if (count > 0)
             {
                 return true;
-            }else
+            }
+            else
             {
                 return false;
             }

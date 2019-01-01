@@ -21,6 +21,11 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult Market()
         {
+            if(Session["error"] != null)
+            {
+                ViewBag.Error = Session["error"];
+                Session["error"] = null;
+            }
             List<PlayerViewModel> localPlayers = PC.getUpdatedListOfPlayers();
             List<PlayerViewModel> showPlayers = new List<PlayerViewModel>();
             double pageCount = localPlayers.Count / numberInPage;
@@ -68,7 +73,7 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult BuyPlayer(int playerId, int cost)
         {
-            int foundPlayerCount = DB.isUserHavePlayerById(playerId);
+            int foundPlayerCount = DB.isUserHavePlayerById((int)Session["id"],playerId);
             if (foundPlayerCount == -1)
             {
                 //Session error
@@ -88,7 +93,7 @@ namespace WebApplication1.Controllers
             }
             else
             {
-                // Toks zaidejas jau egzistuoja/ Prikti negalima
+                Session["error"] = "Toks zaidejas jau nupirktas. Pirkti negalima.";
             }
             return RedirectToAction("Market");
         }

@@ -2,6 +2,10 @@
 @{
     Layout = "~/Views/Shared/_LayoutAfterLogin.cshtml";
 }
+@if (ViewBag.Error != null)
+{
+   <div class="alert-danger" >@ViewBag.Error</div>
+}
 
 <table class="invisibleTableBorders">
     <tr>
