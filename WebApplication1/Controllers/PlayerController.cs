@@ -14,7 +14,6 @@ namespace WebApplication1.Controllers
         UserDB DB = new UserDB();
         PlayerDB PDB = new PlayerDB();
         private int numberInPage = 10;
-        List<PlayerViewModel> localPlayers = new List<PlayerViewModel>();
         MessageDB MDB = new MessageDB();
         TeamCostController teamCost = new TeamCostController();
         PlayerRepository PR = new PlayerRepository();

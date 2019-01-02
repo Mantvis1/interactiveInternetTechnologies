@@ -29,7 +29,6 @@ namespace WebApplication1.Controllers
         {
             List<PlayerViewModel> players = new List<PlayerViewModel>();
             List<PlayerModel> playersList = PDB.getAllLocalPlayers();
-            
             for (int i = 0; i < playersList.Count; i++)
             {
                 EffModel ef = PDB.getPointsAndEff(playersList[i].ID);
