@@ -12,7 +12,7 @@ namespace WebApplication1.Controllers
         {
             if (Session["id"] == null)
             {
-                return RedirectToAction("About", "Home");
+                return RedirectToAction("LogIn", "Account");
             }
             ViewBag.ErrorMessage = Session["error"];
             Session["error"] = null;

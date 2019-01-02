@@ -69,7 +69,7 @@ namespace WebApplication1.Controllers
         {
             if (Session["id"] == null)
             {
-                return RedirectToAction("About", "Home");
+                return RedirectToAction("LogIn", "Account");
             }
             List<MessageViewModel> messages = getUpdatedListOfMessages();
             return View(messages);

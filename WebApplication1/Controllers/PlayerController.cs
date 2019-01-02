@@ -21,11 +21,11 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult Market()
         {
-            if(Session["id"] == null)
+            if (Session["id"] == null)
             {
-                return RedirectToAction("About", "Home");
+                return RedirectToAction("LogIn", "Account");
             }
-            if(Session["error"] != null)
+                if (Session["error"] != null)
             {
                 ViewBag.Error = Session["error"];
                 Session["error"] = null;
@@ -66,7 +66,7 @@ namespace WebApplication1.Controllers
         {
             if (Session["id"] == null)
             {
-                return RedirectToAction("About", "Home");
+                return RedirectToAction("LogIn", "Account");
             }
             List<int> playerId = DB.getUserPlayerIdList((int)Session["id"]);
             List<PlayerViewModel> players = new List<PlayerViewModel>();
@@ -97,6 +97,7 @@ namespace WebApplication1.Controllers
                     Session["money"] = moneyLeft;
                     MDB.addNewMessage((int)Session["id"], 1, -cost);
                     teamCost.GetTeamCost((int)Session["id"]);
+                    Session["error"] = "Sekmingai nupirkote zaideja";
                 }
             }
             else
