@@ -5,18 +5,19 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication1.DbContext;
 using WebApplication1.Models;
+using WebApplication1.Repository;
 
 namespace WebApplication1.Controllers
 {
     public class PlayerController : Controller
     {
-        PlayerManagerController PC = new PlayerManagerController();
         UserDB DB = new UserDB();
         PlayerDB PDB = new PlayerDB();
         private int numberInPage = 10;
         List<PlayerViewModel> localPlayers = new List<PlayerViewModel>();
         MessageDB MDB = new MessageDB();
         TeamCostController teamCost = new TeamCostController();
+        PlayerRepository PR = new PlayerRepository();
 
         [HttpGet]
         public ActionResult Market()
@@ -30,7 +31,7 @@ namespace WebApplication1.Controllers
                 ViewBag.Error = Session["error"];
                 Session["error"] = null;
             }
-            List<PlayerViewModel> localPlayers = PC.getUpdatedListOfPlayers();
+            List<PlayerViewModel> localPlayers = PR.GetAll();
             List<PlayerViewModel> showPlayers = new List<PlayerViewModel>();
             double pageCount = localPlayers.Count / numberInPage;
             PagingModel page = new PagingModel();
