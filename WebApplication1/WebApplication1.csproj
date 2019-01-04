@@ -277,8 +277,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Constants\" />
-    <Folder Include="Views\TeamCost\" />
-    <Folder Include="Views\TournamentManage\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -10,10 +10,10 @@
 <h2>Settings</h2>
 <form action="/Manage/ChangePassword" method="post">
     <fieldset>
-        <legend>Slaptazodzio keitimas</legend>
-        Įveskite seną slaptažodi: <input type="password" name="oldPassword" required /> <br />
-        Įveskite naują slaptažodi: <input type="password" name="newPassword" required/><br />
-        Pakartokite naują slaptažodi: <input type="password" name="repeatNewPassword" required/><br />
+        <legend>Slaptažodžio keitimas</legend>
+        Įveskite seną slaptažodį: <input type="password" name="oldPassword" required /> <br />
+        Įveskite naują slaptažodį: <input type="password" name="newPassword" required/><br />
+        Pakartokite naują slaptažodį: <input type="password" name="repeatNewPassword" required/><br />
         <button type="submit" class="btn btn-info">Keisti</button>
     </fieldset>
 </form>
@@ -21,9 +21,9 @@
 <br />
 <form action="/Manage/ChangeEmail" method="post">
     <fieldset>
-        <legend>Email keitimas</legend>
-        Įveskite seną email: <input type="email" name="oldEmail" required/><br />
-        Įveskite naują email: <input type="email" name="newEmail" required/><br />
+        <legend>Elektroninio pašto keitimas</legend>
+        Įveskite seną elektroninį paštą: <input type="email" name="oldEmail" required/><br />
+        Įveskite naują elektroninį paštą: <input type="email" name="newEmail" required/><br />
         Įveskite slaptažodį <input type="password" name="password" required/><br />
         <button type="submit" class="btn btn-info">Keisti</button>
     </fieldset>
@@ -33,8 +33,8 @@
 <form action="/Manage/ChangeUsername" method="post">
     <fieldset>
         <legend>Paskyros vardo keitimas</legend>
-        Naujas vardas:<input type="text" name="newUserName" required /> <br />
-        Slaptazodis: <input type="password" name="password" required/> <br />
+        Įveskite naują paskyros vardas:<input type="text" name="newUserName" required /> <br />
+        Įveskite slaptažodį: <input type="password" name="password" required/> <br />
         <button type="submit" class="btn btn-info">Keisti</button>
     </fieldset>
 </form>
@@ -42,8 +42,8 @@
 <br />
 <form action="/Manage/DeleteAccount" method="delete">
     <fieldset>
-        <legend>Paskyros salinimas</legend>
-        Slaptazodis: <input type="password" name="password" required /> <br />
-        <button type="submit" class="btn btn-danger">salinti</button>
+        <legend>Paskyros šalinimas</legend>
+        Įveskite slaptažodį: <input type="password" name="password" required /> <br />
+        <button type="submit" class="btn btn-danger">Šalinti</button>
     </fieldset>
 </form>
