@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using WebApplication1.Controllers;
 using WebApplication1.Models;
 
@@ -9,7 +6,7 @@ namespace WebApplication1.Repository
 {
     public class PlayerRepository
     {
-        PlayerManagerController PC = new PlayerManagerController();
+        private PlayerManagerController PC = new PlayerManagerController();
         private List<PlayerViewModel> players = new List<PlayerViewModel>();
 
         public PlayerRepository()
@@ -20,11 +17,6 @@ namespace WebApplication1.Repository
         public List<PlayerViewModel> GetAll()
         {
             return players;
-        }
-
-        public void Add(PlayerViewModel player)
-        {
-            players.Add(player);
         }
     }
 }

@@ -33,7 +33,7 @@ namespace WebApplication1.DbContext
             return count;
         }
 
-        public bool CreateNewCompetotor(int userId)
+        public void CreateNewCompetotor(int userId)
         {
             int isExist = isUserExist(userId);
             if (isExist == 0)
@@ -43,11 +43,6 @@ namespace WebApplication1.DbContext
                 MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
                 MySqlDataReader reader = commandDatabase.ExecuteReader();
                 databaseConnection.Close();
-                return true;
-            }
-            else
-            {
-                return false;
             }
         }
 

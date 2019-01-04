@@ -26,16 +26,16 @@ namespace WebApplication1.Controllers
             {
                 if (MDB.UpdatePassword((int)Session["id"], newPassword) == true)
                 {
-                    Session["error"] = "Sekmingai paskeistas slaptažodis";
+                    Session["error"] = "Sėkmingai paskeistas slaptažodis";
                 }
                 else
                 {
-                    Session["error"] = "Klaida pakeičiant slaptažodį";
+                    Session["error"] = "Klaidą pakeičiant slaptažodį";
                 }
             }
             else
             {
-                Session["error"] = "Skiriasi ivesti slaptazodziai";
+                Session["error"] = "Skiriasi įvesti slaptazodziai";
             }
             return RedirectToAction("Settings");
         }
@@ -62,7 +62,7 @@ namespace WebApplication1.Controllers
             if (MDB.isUserExists((int)Session["id"], password) == true)
             {
                 MDB.UpdateEmail((int)Session["id"], newEmail);
-                Session["error"] = "Sekmingai paskeistas pastas";
+                Session["error"] = "Sėkmingai pakeistas paštas";
             }
             else
             {

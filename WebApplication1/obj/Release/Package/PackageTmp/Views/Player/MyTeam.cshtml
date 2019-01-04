@@ -5,6 +5,14 @@
 }
 
 <h2>Mano komanda</h2>
+@if (ViewBag.Error != null)
+{
+    <div class="alert-danger">@ViewBag.Error</div>
+}
+else if (ViewBag.SuccessMessage != null)
+{
+    <div class="alert-success">@ViewBag.Error</div>
+}
 <table class="invisibleTableBorders">
     <tr>
 

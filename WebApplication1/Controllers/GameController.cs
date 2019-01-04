@@ -44,7 +44,7 @@ namespace WebApplication1.Controllers
             bool isUserHavePlayers = DB.isUserHaveAtLeastOnePlayer((int)Session["id"]);
             if (isUserHavePlayers == true)
             {
-                bool registrationSuccess = game.CreateNewCompetotor((int)Session["id"]);
+                game.CreateNewCompetotor((int)Session["id"]);
             }
             else
             {

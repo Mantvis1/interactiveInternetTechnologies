@@ -25,10 +25,14 @@ namespace WebApplication1.Controllers
             {
                 return RedirectToAction("LogIn", "Account");
             }
-                if (Session["error"] != null)
+            if (Session["error"] != null)
             {
                 ViewBag.Error = Session["error"];
                 Session["error"] = null;
+            }else if (Session["success"] != null)
+            {
+                ViewBag.SuccessMessage = Session["success"];
+                Session["success"] = null;
             }
             List<PlayerViewModel> localPlayers = PR.GetAll();
             List<PlayerViewModel> showPlayers = new List<PlayerViewModel>();
@@ -68,6 +72,16 @@ namespace WebApplication1.Controllers
             {
                 return RedirectToAction("LogIn", "Account");
             }
+            if (Session["error"] != null)
+            {
+                ViewBag.Error = Session["error"];
+                Session["error"] = null;
+            }
+            else if (Session["success"] != null)
+            {
+                ViewBag.SuccessMessage = Session["success"];
+                Session["success"] = null;
+            }
             List<int> playerId = DB.getUserPlayerIdList((int)Session["id"]);
             List<PlayerViewModel> players = new List<PlayerViewModel>();
             foreach (int id in playerId)
@@ -81,12 +95,8 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult BuyPlayer(int playerId, int cost)
         {
-            int foundPlayerCount = DB.isUserHavePlayerById((int)Session["id"],playerId);
-            if (foundPlayerCount == -1)
-            {
-                //Session error
-            }
-            else if (foundPlayerCount == 0)
+            int foundPlayerCount = DB.isUserHavePlayerById((int)Session["id"], playerId);
+            if (foundPlayerCount == 0)
             {
                 int userMoney = DB.getMoneyById((int)Session["id"]);
                 if (userMoney >= cost)
@@ -97,7 +107,7 @@ namespace WebApplication1.Controllers
                     Session["money"] = moneyLeft;
                     MDB.addNewMessage((int)Session["id"], 1, -cost);
                     teamCost.GetTeamCost((int)Session["id"]);
-                    Session["error"] = "Sekmingai nupirkote zaideja";
+                    Session["success"] = "Sėkmingai nusipirkote žaidėją";
                 }
             }
             else
@@ -114,17 +124,18 @@ namespace WebApplication1.Controllers
             if (isDeleted == true)
             {
                 PlayerViewModel player = new PlayerViewModel(playerId, "", 0, PDB.getEffById(playerId));
-                double money = DB.getMoneyById((int)Session["id"]);
-                double cost = player.getCost(1);
-                double moneyLeft = money + cost;
+                int money = DB.getMoneyById((int)Session["id"]);
+                int cost = (int)Math.Round(player.getCost(1), 0);
+                int moneyLeft = money + cost;
                 DB.updateUserMoney((int)Session["id"], (Convert.ToInt32(moneyLeft)));
                 Session["money"] = moneyLeft;
                 MDB.addNewMessage((int)Session["id"], 2, cost);
                 teamCost.GetTeamCost((int)Session["id"]);
+                Session["success"] = "Sėkmingai pardavėte žaidėją";
             }
             else
             {
-                // klaida
+                Session["error"] = "Klaida parduodant žaidėją";
             }
             return RedirectToAction("MyTeam");
         }

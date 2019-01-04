@@ -1,5 +1,5 @@
-﻿<!DOCTYPE html>
-<html>
+﻿<!DOCTYPE html >
+<html lang="lt">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +24,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Mano komanda", "MyTeam", "Player")</li>
                     <li>@Html.ActionLink("Varžybos", "GameSelection", "Game")</li>
-                    <li>@Html.ActionLink("Zaideju turgus", "Market", "Player")</li>
+                    <li>@Html.ActionLink("Žaideju turgus", "Market", "Player")</li>
                     <li>@Html.ActionLink("Reitingai", "Ranking", "Game")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -36,6 +36,13 @@
         <hr />
         <footer>
             <p>&copy; @DateTime.Now</p>
+            <p>
+                <a href="http://jigsaw.w3.org/css-validator/check/referer">
+                    <img style="border:0;width:88px;height:31px"
+                         src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
+                         alt="Valid CSS!" />
+                </a>
+            </p>
         </footer>
     </div>
 
@@ -43,4 +50,4 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
-</html>
+</html lang="lt">

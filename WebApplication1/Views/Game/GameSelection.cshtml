@@ -1,11 +1,10 @@
 ﻿@using WebApplication1.Controllers;
 @{
-    ViewBag.Title = "GameSelection";
     Layout = "~/Views/Shared/_LayoutAfterLogin.cshtml";
 }
 
 <h2>GameSelection</h2>
-<div>Jau užsiregistravo @ViewBag.Message dalyvių</div>
+<div>Jau užsiregistravo @ViewBag.Message dalyvių(kad prasidėtų varžybos reikia 8)</div>
 <button type="button" onclick="location.href='@Url.Action("RegisterNewCompetotor", "Game")'">Registruotis</button> 
 @if(ViewBag.Error != null)
 {
