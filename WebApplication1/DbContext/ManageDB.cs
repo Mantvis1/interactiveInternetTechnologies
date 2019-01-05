@@ -15,7 +15,7 @@ namespace WebApplication1.DbContext
         public bool UpdatePassword(int id, string password)
         {
             databaseConnection.Open();
-            query = "UPDATE user SET Password = '"+password+"' where id ="+id;
+            query = "UPDATE user SET Password = '" + password + "' where id =" + id;
             MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
             MySqlDataReader reader = commandDatabase.ExecuteReader();
             databaseConnection.Close();
@@ -73,7 +73,7 @@ namespace WebApplication1.DbContext
         {
             int count = 0;
             databaseConnection.Open();
-            query = "SELECT count(id) FROM user WHERE id = "+id+" and Password = '"+password+"'";
+            query = "SELECT count(id) FROM user WHERE id = " + id + " and Password = '" + password + "'";
             MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
             MySqlDataReader reader = commandDatabase.ExecuteReader();
             if (reader.HasRows)
@@ -94,13 +94,10 @@ namespace WebApplication1.DbContext
         {
             databaseConnection.Open();
             string time = Convert.ToString(DateTime.Now);
-            query = "INSERT INTO message(id, userId, messageId, time, money) VALUES (NULL,"+userId+",'"+message+"','"+time+"',"+cost+")";
+            query = "INSERT INTO message(id, userId, messageId, time, money) VALUES (NULL," + userId + ",'" + message + "','" + time + "'," + cost + ")";
             MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
             MySqlDataReader reader = commandDatabase.ExecuteReader();
             databaseConnection.Close();
-        
-        
-
         }
     }
 }

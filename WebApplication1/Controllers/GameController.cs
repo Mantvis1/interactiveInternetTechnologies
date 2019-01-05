@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using WebApplication1.DbContext;
 using WebApplication1.Models;
@@ -24,7 +22,7 @@ namespace WebApplication1.Controllers
                 return RedirectToAction("About", "Home");
             }
             int countOfPlayerInTournament = game.CountOfTournamentPlayer();
-            if(Session["error"] != null)
+            if (Session["error"] != null)
             {
                 ViewBag.Error = Session["error"];
                 Session["error"] = null;

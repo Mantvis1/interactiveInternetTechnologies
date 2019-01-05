@@ -1,7 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using WebApplication1.Models;
 
 namespace WebApplication1.DbContext

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using WebApplication1.DbContext;
 using WebApplication1.Models;
@@ -144,7 +142,7 @@ namespace WebApplication1.Controllers
 
         private List<Tuple<int, int>> getRanks(List<Tuple<int, int>> rank)
         {
-            for (int i = 1; i <= rank.Count/2; i++)
+            for (int i = 1; i <= rank.Count / 2; i++)
             {
                 if (rank[i - 1].Item2 < rank[rank.Count - i].Item2)
                 {

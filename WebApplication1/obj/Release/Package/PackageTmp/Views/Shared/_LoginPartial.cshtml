@@ -9,7 +9,7 @@
             <li>
                 @Html.ActionLink("Sveiki " + Session["name"].ToString() + "!", "Settings", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
             </li>
-            <li>@Html.ActionLink(""+Session["Money"] +"","Messages","Game")</li>
+            <li>@Html.ActionLink("" + Session["Money"] + "", "Messages", "Game")</li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Atsijungti</a></li>
         </ul>
     }

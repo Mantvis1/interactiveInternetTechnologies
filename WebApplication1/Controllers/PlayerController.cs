@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using WebApplication1.DbContext;
 using WebApplication1.Models;
@@ -29,7 +27,8 @@ namespace WebApplication1.Controllers
             {
                 ViewBag.Error = Session["error"];
                 Session["error"] = null;
-            }else if (Session["success"] != null)
+            }
+            else if (Session["success"] != null)
             {
                 ViewBag.SuccessMessage = Session["success"];
                 Session["success"] = null;

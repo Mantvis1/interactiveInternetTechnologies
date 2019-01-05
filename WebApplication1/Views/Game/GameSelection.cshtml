@@ -4,8 +4,8 @@
 }
 
 <div>Jau užsiregistravo @ViewBag.Message dalyvių(kad prasidėtų varžybos reikia 8)</div>
-<button type="button" onclick="location.href='@Url.Action("RegisterNewCompetotor", "Game")'">Registruotis</button> 
-@if(ViewBag.Error != null)
+<button type="button" onclick="location.href='@Url.Action("RegisterNewCompetotor", "Game")'">Registruotis</button>
+@if (ViewBag.Error != null)
 {
-    <div>@ViewBag.Error</div>
+    <div class="alert-danger">@ViewBag.Error</div>
 }

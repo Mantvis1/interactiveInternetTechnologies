@@ -1,8 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using WebApplication1.Models;
 
 namespace WebApplication1.DbContext
@@ -80,7 +78,6 @@ namespace WebApplication1.DbContext
             MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
             MySqlDataReader reader = commandDatabase.ExecuteReader();
             databaseConnection.Close();
-
         }
     }
 }
