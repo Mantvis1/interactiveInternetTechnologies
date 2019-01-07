@@ -6,7 +6,7 @@ namespace WebApplication1.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("About");
         }
 
         public ActionResult About()
