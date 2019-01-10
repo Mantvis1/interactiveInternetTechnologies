@@ -2,11 +2,11 @@
 {
     public class RankingModel : BaseModel
     {
-        public int Rank;
-        public string Name;
-        public int Win;
-        public int Lose;
-        public int Value;
+        public int Rank { get; set; }
+        public string Name { get; set; }
+        public int Win { get; set; }
+        public int Lose { get; set; }
+        public int Value { get; set; }
 
         public RankingModel(int Rank, string Name, int Win, int Lose, int Value)
         {

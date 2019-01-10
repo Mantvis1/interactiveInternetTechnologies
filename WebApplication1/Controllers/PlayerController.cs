@@ -9,12 +9,12 @@ namespace WebApplication1.Controllers
 {
     public class PlayerController : Controller
     {
-        UserDB DB = new UserDB();
-        PlayerDB PDB = new PlayerDB();
+        private UserDB uDB = new UserDB();
+        private PlayerDB pDB = new PlayerDB();
         private int numberInPage = 10;
-        MessageDB MDB = new MessageDB();
-        TeamCostController teamCost = new TeamCostController();
-        PlayerRepository PR = new PlayerRepository();
+        private MessageDB mDB = new MessageDB();
+        private TeamCostController teamCost = new TeamCostController();
+        private PlayerRepository pR = new PlayerRepository();
 
         [HttpGet]
         public ActionResult Market()
@@ -33,7 +33,7 @@ namespace WebApplication1.Controllers
                 ViewBag.SuccessMessage = Session["success"];
                 Session["success"] = null;
             }
-            List<PlayerViewModel> localPlayers = PR.GetAll();
+            List<PlayerViewModel> localPlayers = pR.GetAll();
             List<PlayerViewModel> showPlayers = new List<PlayerViewModel>();
             double pageCount = localPlayers.Count / numberInPage;
             PagingModel page = new PagingModel();
@@ -58,7 +58,7 @@ namespace WebApplication1.Controllers
             Session["currentPage"] = null;
             var MarketViewModel = new PagedViewModel
             {
-                players = showPlayers,
+                Players = showPlayers,
                 Page = page
             };
             return View(MarketViewModel);
@@ -81,11 +81,11 @@ namespace WebApplication1.Controllers
                 ViewBag.SuccessMessage = Session["success"];
                 Session["success"] = null;
             }
-            List<int> playerId = DB.getUserPlayerIdList((int)Session["id"]);
+            List<int> playerId = uDB.getUserPlayerIdList((int)Session["id"]);
             List<PlayerViewModel> players = new List<PlayerViewModel>();
             foreach (int id in playerId)
             {
-                players.Add(new PlayerViewModel(id, PDB.getPlayerById(id), PDB.getPlayerPointsById(id), 0));
+                players.Add(new PlayerViewModel(id, pDB.getPlayerById(id), pDB.getPlayerPointsById(id), 0));
             }
             return View(players);
         }
@@ -94,17 +94,17 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult BuyPlayer(int playerId, int cost)
         {
-            int foundPlayerCount = DB.isUserHavePlayerById((int)Session["id"], playerId);
+            int foundPlayerCount = uDB.isUserHavePlayerById((int)Session["id"], playerId);
             if (foundPlayerCount == 0)
             {
-                int userMoney = DB.getMoneyById((int)Session["id"]);
+                int userMoney = uDB.getMoneyById((int)Session["id"]);
                 if (userMoney >= cost)
                 {
                     int moneyLeft = userMoney - cost;
-                    DB.insertPlayerToUser((int)Session["id"], playerId);
-                    DB.updateUserMoney((int)Session["id"], moneyLeft);
+                    uDB.insertPlayerToUser((int)Session["id"], playerId);
+                    uDB.updateUserMoney((int)Session["id"], moneyLeft);
                     Session["money"] = moneyLeft;
-                    MDB.addNewMessage((int)Session["id"], 1, -cost);
+                    mDB.addNewMessage((int)Session["id"], 1, -cost);
                     teamCost.GetTeamCost((int)Session["id"]);
                     Session["success"] = "Sėkmingai nusipirkote žaidėją";
                 }
@@ -119,16 +119,16 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult SellPlayer(int playerId)
         {
-            bool isDeleted = DB.DeletePlayerById(playerId, (int)Session["id"]);
+            bool isDeleted = uDB.DeletePlayerById(playerId, (int)Session["id"]);
             if (isDeleted == true)
             {
-                PlayerViewModel player = new PlayerViewModel(playerId, "", 0, PDB.getEffById(playerId));
-                int money = DB.getMoneyById((int)Session["id"]);
+                PlayerViewModel player = new PlayerViewModel(playerId, "", 0, pDB.getEffById(playerId));
+                int money = uDB.getMoneyById((int)Session["id"]);
                 int cost = (int)Math.Round(player.getCost(1), 0);
                 int moneyLeft = money + cost;
-                DB.updateUserMoney((int)Session["id"], (Convert.ToInt32(moneyLeft)));
+                uDB.updateUserMoney((int)Session["id"], (Convert.ToInt32(moneyLeft)));
                 Session["money"] = moneyLeft;
-                MDB.addNewMessage((int)Session["id"], 2, cost);
+                mDB.addNewMessage((int)Session["id"], 2, cost);
                 teamCost.GetTeamCost((int)Session["id"]);
                 Session["success"] = "Sėkmingai pardavėte žaidėją";
             }

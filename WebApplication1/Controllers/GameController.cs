@@ -8,10 +8,10 @@ namespace WebApplication1.Controllers
 {
     public class GameController : Controller
     {
-        GameDB game = new GameDB();
-        RankingDB ranking = new RankingDB();
-        UserDB DB = new UserDB();
-        MessageDB MDB = new MessageDB();
+        private GameDB game = new GameDB();
+        private RankingDB ranking = new RankingDB();
+        private UserDB uDB = new UserDB();
+        private MessageDB mDB = new MessageDB();
 
 
         [HttpGet]
@@ -39,7 +39,7 @@ namespace WebApplication1.Controllers
         // [HttpPost]
         public ActionResult RegisterNewCompetotor()
         {
-            bool isUserHavePlayers = DB.isUserHaveAtLeastOnePlayer((int)Session["id"]);
+            bool isUserHavePlayers = uDB.isUserHaveAtLeastOnePlayer((int)Session["id"]);
             if (isUserHavePlayers == true)
             {
                 game.CreateNewCompetotor((int)Session["id"]);
@@ -78,7 +78,7 @@ namespace WebApplication1.Controllers
         {
             if (messageId != null)
             {
-                MDB.deleteMessageById(Convert.ToInt32(messageId));
+                mDB.deleteMessageById(Convert.ToInt32(messageId));
             }
             return RedirectToAction("Messages");
         }
@@ -86,17 +86,17 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult DeleteAllMessages()
         {
-            MDB.deleteAllMessages((int)Session["id"]);
+            mDB.deleteAllMessages((int)Session["id"]);
             return RedirectToAction("Messages");
         }
 
         private List<MessageViewModel> getUpdatedListOfMessages()
         {
-            List<MessageModel> messages = MDB.getAllUserMessages((int)Session["id"]);
+            List<MessageModel> messages = mDB.getAllUserMessages((int)Session["id"]);
             List<MessageViewModel> updatedList = new List<MessageViewModel>();
             foreach (var message in messages)
             {
-                updatedList.Add(new MessageViewModel(message.ID, message.userId, MDB.GetMessageTypeById(message.messageId), message.date, message.money));
+                updatedList.Add(new MessageViewModel(message.ID, message.UserId, mDB.GetMessageTypeById(message.MessageId), message.Date, message.Money));
             }
             return updatedList;
         }

@@ -2,19 +2,19 @@
 {
     public class PagingModel
     {
-        public int firstPage;
-        public int lastPage;
-        public int currentPage;
-        public int nextPage;
-        public int beforePage;
+        public int FirstPage { get; set; }
+        public int LastPage { get; set; }
+        public int CurrentPage { get; set; }
+        public int NextPage { get; set; }
+        public int BeforePage { get; set; }
 
         public PagingModel(int last, int current)
         {
-            this.firstPage = 1;
-            this.lastPage = last;
-            this.currentPage = current;
-            this.nextPage = currentPage + 1;
-            this.beforePage = currentPage - 1;
+            FirstPage = 1;
+            LastPage = last;
+            CurrentPage = current;
+            NextPage = CurrentPage + 1;
+            BeforePage = CurrentPage - 1;
         }
 
         public PagingModel()

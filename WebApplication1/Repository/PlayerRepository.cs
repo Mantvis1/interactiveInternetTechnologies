@@ -6,12 +6,12 @@ namespace WebApplication1.Repository
 {
     public class PlayerRepository
     {
-        private PlayerManagerController PC = new PlayerManagerController();
+        private PlayerManagerController pC = new PlayerManagerController();
         private List<PlayerViewModel> players = new List<PlayerViewModel>();
 
         public PlayerRepository()
         {
-            players = PC.getUpdatedListOfPlayers();
+            players = pC.getUpdatedListOfPlayers();
         }
 
         public List<PlayerViewModel> GetAll()

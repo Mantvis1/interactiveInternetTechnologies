@@ -76,8 +76,8 @@ namespace WebApplication1.DbContext
                         eff += manager.playerEff(points, reader.GetInt32(13), reader.GetInt32(14), reader.GetInt32(16), reader.GetInt32(18), reader.GetInt32(5) - reader.GetInt32(4), reader.GetInt32(9) - reader.GetInt32(8), reader.GetInt32(17));
                     }
                     ef.ID = id;
-                    ef.pts = points / limit;
-                    ef.eff = eff / limit;
+                    ef.Pts = points / limit;
+                    ef.Eff = eff / limit;
                 }
                 nbaDatabaseConnection.Close();
                 return ef;
@@ -103,7 +103,7 @@ namespace WebApplication1.DbContext
             if (player != null)
             {
                 databaseConnection.Open();
-                query = "INSERT INTO playerinfo(id, playerId, points, eff) VALUES (NULL," + player.ID + "," + player.pts + "," + player.eff + ")";
+                query = "INSERT INTO playerinfo(id, playerId, points, eff) VALUES (NULL," + player.ID + "," + player.Pts + "," + player.Eff + ")";
                 MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
                 MySqlDataReader reader = commandDatabase.ExecuteReader();
                 databaseConnection.Close();
@@ -164,8 +164,8 @@ namespace WebApplication1.DbContext
             {
                 while (reader.Read())
                 {
-                    eff.eff = reader.GetDouble(1);
-                    eff.pts = reader.GetDouble(0);
+                    eff.Eff = reader.GetDouble(1);
+                    eff.Pts = reader.GetDouble(0);
                 }
             }
             databaseConnection.Close();

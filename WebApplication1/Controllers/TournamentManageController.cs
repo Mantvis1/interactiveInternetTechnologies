@@ -9,10 +9,10 @@ namespace WebApplication1.Controllers
 {
     public class TournamentManageController : Controller
     {
-        GameDB GDB = new GameDB();
-        MessageDB MDB = new MessageDB();
-        UserDB UDB = new UserDB();
-        RankingDB RDB = new RankingDB();
+        private GameDB gDB = new GameDB();
+        private MessageDB mDB = new MessageDB();
+        private UserDB uDB = new UserDB();
+        private RankingDB rDB = new RankingDB();
 
         public TournamentManageController()
         {
@@ -21,7 +21,7 @@ namespace WebApplication1.Controllers
 
         private void execute()
         {
-            List<int> users = GDB.getAllUsersOfTournament();
+            List<int> users = gDB.getAllUsersOfTournament();
             Random rnd = new Random();
             List<Tuple<int, int>> groupA = new List<Tuple<int, int>>((users.Count / 2) + 1);
             List<Tuple<int, int>> groupB = new List<Tuple<int, int>>((users.Count / 2) + 1);
@@ -29,7 +29,7 @@ namespace WebApplication1.Controllers
             for (int i = 0; i < halfOfUsersCount; i++)
             {
                 int index = rnd.Next(users.Count - 1);
-                int? points = GDB.getAllPointsForUserById(users[index]);
+                int? points = gDB.getAllPointsForUserById(users[index]);
                 if (points != null)
                 {
                     groupA.Add(new Tuple<int, int>(users[index], Convert.ToInt32(points)));
@@ -40,7 +40,7 @@ namespace WebApplication1.Controllers
                 }
                 users.RemoveAt(index);
                 index = rnd.Next(users.Count - 1);
-                points = GDB.getAllPointsForUserById(users[index]);
+                points = gDB.getAllPointsForUserById(users[index]);
                 if (points != null)
                 {
                     groupB.Add(new Tuple<int, int>(users[index], Convert.ToInt32(points)));
@@ -87,16 +87,16 @@ namespace WebApplication1.Controllers
         {
             for (int i = 0; i < top4.Count; i++)
             {
-                MDB.addNewMessage(top4[i].Item1, 3, Convert.ToInt32(prize));
-                double money = UDB.getMoneyById(top4[i].Item1);
-                UDB.updateUserMoney(top4[i].Item1, Convert.ToInt32(money + prize));
+                mDB.addNewMessage(top4[i].Item1, 3, Convert.ToInt32(prize));
+                double money = uDB.getMoneyById(top4[i].Item1);
+                uDB.updateUserMoney(top4[i].Item1, Convert.ToInt32(money + prize));
                 prize /= 2;
             }
         }
 
         private void clearTournamentTable()
         {
-            GDB.ClearTournamentTable();
+            gDB.ClearTournamentTable();
         }
 
         private void UpdateUserWonAndLostTable(List<Tuple<int, int>> top4, List<Tuple<int, int>> last4)
@@ -105,18 +105,18 @@ namespace WebApplication1.Controllers
             {
                 if (i == 0)
                 {
-                    RankingModel rank = RDB.getUserRankinsById(top4[i].Item1);
-                    RDB.updateRankings(top4[i].Item1, rank.Win + 3, rank.Lose);
+                    RankingModel rank = rDB.getUserRankinsById(top4[i].Item1);
+                    rDB.updateRankings(top4[i].Item1, rank.Win + 3, rank.Lose);
                 }
                 else if (i == 1 || i == 2)
                 {
-                    RankingModel rank = RDB.getUserRankinsById(top4[i].Item1);
-                    RDB.updateRankings(top4[i].Item1, rank.Win + 2, rank.Lose + 1);
+                    RankingModel rank = rDB.getUserRankinsById(top4[i].Item1);
+                    rDB.updateRankings(top4[i].Item1, rank.Win + 2, rank.Lose + 1);
                 }
                 else if (i == 3)
                 {
-                    RankingModel rank = RDB.getUserRankinsById(top4[i].Item1);
-                    RDB.updateRankings(top4[i].Item1, rank.Win + 1, rank.Lose + 2);
+                    RankingModel rank = rDB.getUserRankinsById(top4[i].Item1);
+                    rDB.updateRankings(top4[i].Item1, rank.Win + 1, rank.Lose + 2);
                 }
             }
 
@@ -124,18 +124,18 @@ namespace WebApplication1.Controllers
             {
                 if (i == 0)
                 {
-                    RankingModel rank = RDB.getUserRankinsById(top4[i].Item1);
-                    RDB.updateRankings(top4[i].Item1, rank.Win + 2, rank.Lose + 1);
+                    RankingModel rank = rDB.getUserRankinsById(top4[i].Item1);
+                    rDB.updateRankings(top4[i].Item1, rank.Win + 2, rank.Lose + 1);
                 }
                 else if (i == 1 || i == 2)
                 {
-                    RankingModel rank = RDB.getUserRankinsById(top4[i].Item1);
-                    RDB.updateRankings(top4[i].Item1, rank.Win + 1, rank.Lose + 2);
+                    RankingModel rank = rDB.getUserRankinsById(top4[i].Item1);
+                    rDB.updateRankings(top4[i].Item1, rank.Win + 1, rank.Lose + 2);
                 }
                 else if (i == 3)
                 {
-                    RankingModel rank = RDB.getUserRankinsById(top4[i].Item1);
-                    RDB.updateRankings(top4[i].Item1, rank.Win, rank.Lose + 3);
+                    RankingModel rank = rDB.getUserRankinsById(top4[i].Item1);
+                    rDB.updateRankings(top4[i].Item1, rank.Win, rank.Lose + 3);
                 }
             }
         }

@@ -6,8 +6,8 @@ namespace WebApplication1.Controllers
 {
     public class AccountController : Controller
     {
-        UserDB user = new UserDB();
-        GameDB game = new GameDB();
+        private UserDB user = new UserDB();
+        private GameDB game = new GameDB();
 
         [HttpGet]
         public ActionResult Register()

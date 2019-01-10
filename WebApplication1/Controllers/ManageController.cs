@@ -5,7 +5,7 @@ namespace WebApplication1.Controllers
 {
     public class ManageController : Controller
     {
-        ManageDB MDB = new ManageDB();
+        private ManageDB mDB = new ManageDB();
 
         [HttpGet]
         public ActionResult Settings()
@@ -24,7 +24,7 @@ namespace WebApplication1.Controllers
         {
             if (newPassword == repeatNewPassword)
             {
-                if (MDB.UpdatePassword((int)Session["id"], newPassword) == true)
+                if (mDB.UpdatePassword((int)Session["id"], newPassword) == true)
                 {
                     Session["error"] = "Sėkmingai paskeistas slaptažodis";
                 }
@@ -43,9 +43,9 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult ChangeUsername(string newUserName, string password)
         {
-            if (MDB.isUserExists((int)Session["id"], password) == true)
+            if (mDB.isUserExists((int)Session["id"], password) == true)
             {
-                MDB.UpdateUsername((int)Session["id"], newUserName);
+                mDB.UpdateUsername((int)Session["id"], newUserName);
                 Session["name"] = newUserName;
                 Session["error"] = "Sekmingai paskeistas vartotojo vardas";
             }
@@ -59,9 +59,9 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult ChangeEmail(string oldEmail, string newEmail, string password)
         {
-            if (MDB.isUserExists((int)Session["id"], password) == true)
+            if (mDB.isUserExists((int)Session["id"], password) == true)
             {
-                MDB.UpdateEmail((int)Session["id"], newEmail);
+                mDB.UpdateEmail((int)Session["id"], newEmail);
                 Session["error"] = "Sėkmingai pakeistas paštas";
             }
             else
@@ -73,9 +73,9 @@ namespace WebApplication1.Controllers
 
         public ActionResult DeleteAccount(string password)
         {
-            if (MDB.isUserExists((int)Session["id"], password) == true)
+            if (mDB.isUserExists((int)Session["id"], password) == true)
             {
-                MDB.DeleteAccount((int)Session["id"]);
+                mDB.DeleteAccount((int)Session["id"]);
                 Session.Clear();
                 return RedirectToAction("About", "Home");
             }

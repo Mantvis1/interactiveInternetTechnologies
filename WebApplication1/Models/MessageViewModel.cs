@@ -2,17 +2,17 @@
 {
     public class MessageViewModel : BaseModel
     {
-        public int userId { get; set; }
-        public string text { get; set; }
-        public string date { get; set; }
-        public double money { get; set; }
+        public int UserId { get; set; }
+        public string Text { get; set; }
+        public string Date { get; set; }
+        public double Money { get; set; }
 
         public MessageViewModel(int id, int userId, string text, string date, double money) : base(id)
         {
-            this.userId = userId;
-            this.text = text;
-            this.date = date;
-            this.money = money;
+            UserId = userId;
+            Text = text;
+            Date = date;
+            Money = money;
         }
 
         public MessageViewModel()

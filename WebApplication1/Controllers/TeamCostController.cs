@@ -7,8 +7,8 @@ namespace WebApplication1.Controllers
 {
     public class TeamCostController : Controller
     {
-        UserDB UDB = new UserDB();
-        PlayerDB PDB = new PlayerDB();
+        private UserDB uDB = new UserDB();
+        private PlayerDB pDB = new PlayerDB();
 
         public TeamCostController()
         {
@@ -18,13 +18,13 @@ namespace WebApplication1.Controllers
         public void GetTeamCost(int id)
         {
             double cost = 0;
-            List<int> player = UDB.getUserPlayerIdList(id);
+            List<int> player = uDB.getUserPlayerIdList(id);
             foreach (var item in player)
             {
-                PlayerViewModel playerEff = new PlayerViewModel(item, "", 0, PDB.getEffById(item));
+                PlayerViewModel playerEff = new PlayerViewModel(item, "", 0, pDB.getEffById(item));
                 cost += playerEff.getCost(0);
             }
-            UDB.updateUserTeamValue(id, cost);
+            uDB.updateUserTeamValue(id, cost);
         }
 
     }

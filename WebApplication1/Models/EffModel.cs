@@ -2,13 +2,13 @@
 {
     public class EffModel : BaseModel
     {
-        public double pts;
-        public double eff;
+        public double Pts { get; set; }
+        public double Eff { get; set; }
 
         public EffModel(double pts, double eff) : base()
         {
-            this.pts = pts;
-            this.eff = eff;
+            Pts = pts;
+            Eff = eff;
         }
 
         public EffModel()

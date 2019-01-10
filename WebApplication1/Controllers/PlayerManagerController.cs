@@ -29,7 +29,7 @@ namespace WebApplication1.Controllers
             for (int i = 0; i < playersList.Count; i++)
             {
                 EffModel ef = PDB.getPointsAndEff(playersList[i].ID);
-                players.Add(new PlayerViewModel(playersList[i].ID, playersList[i].Name, ef.pts, ef.eff));
+                players.Add(new PlayerViewModel(playersList[i].ID, playersList[i].Name, ef.Pts, ef.Eff));
             }
             return players;
         }
