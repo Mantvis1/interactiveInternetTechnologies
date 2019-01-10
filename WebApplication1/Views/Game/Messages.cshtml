@@ -15,19 +15,19 @@
     @foreach (var message in Model)
     {
         <tr>
-            <td>@message.date</td>
-            <td>@message.text</td>
-            @if (message.money < 0)
+            <td>@message.Date</td>
+            <td>@message.Text</td>
+            @if (message.Money < 0)
             {
-                <td><div class="text-danger">@message.money</div></td>
+                <td><div class="text-danger">@message.Money</div></td>
             }
-            else if (message.money > 0)
+            else if (message.Money > 0)
             {
-                <td><div class="text-success">@message.money</div></td>
+                <td><div class="text-success">@message.Money</div></td>
             }
             else
             {
-                <td><div class="text-info">@message.money</div></td>
+                <td><div class="text-info">@message.Money</div></td>
             }
             <td>
                 <form action="/Game/DeleteSelectedMessage" method="post">
