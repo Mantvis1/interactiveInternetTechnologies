@@ -35,3 +35,7 @@ textarea {
 costColor {
      color: white;
 }
+
+tr td { background-color: white }
+tr:hover td { background-color: lightgreen }
+

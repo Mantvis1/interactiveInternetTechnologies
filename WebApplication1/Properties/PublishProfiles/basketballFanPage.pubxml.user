@@ -173,7 +173,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/13/2018 17:50:29</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>12/26/2018 10:40:03</publishTime>
+      <publishTime>01/10/2019 21:46:17</publishTime>
     </File>
     <File Include="favicon.ico">
       <publishTime>10/30/2018 12:05:51</publishTime>
