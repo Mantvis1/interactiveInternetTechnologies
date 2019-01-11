@@ -12,7 +12,7 @@ namespace WebApplication1.Controllers
         private RankingDB ranking = new RankingDB();
         private UserDB uDB = new UserDB();
         private MessageDB mDB = new MessageDB();
-
+        private int maxNumberOfUsers = 8;
 
         [HttpGet]
         public ActionResult GameSelection()
@@ -27,13 +27,18 @@ namespace WebApplication1.Controllers
                 ViewBag.Error = Session["error"];
                 Session["error"] = null;
             }
-            if (countOfPlayerInTournament == 8)
+            if (countOfPlayerInTournament == maxNumberOfUsers)
             {
                 TournamentManageController tournament = new TournamentManageController();
                 ViewBag.Error = "Turnyras vyksta. Apie rezultatus bus pranesta zinute";
             }
             ViewBag.Message = countOfPlayerInTournament;
-            return View(countOfPlayerInTournament);
+            var viewTournamentModel = new ViewTournamentModel
+            {
+                NumberOfUsers = countOfPlayerInTournament,
+                PartOfRequiredUsers = countOfPlayerInTournament * 100 / maxNumberOfUsers
+            };
+            return View(viewTournamentModel);
         }
 
         // [HttpPost]
