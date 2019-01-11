@@ -111,6 +111,9 @@ namespace WebApplication1.Controllers
                     mDB.addNewMessage((int)Session["id"], 1, -cost);
                     teamCost.GetTeamCost((int)Session["id"]);
                     Session["success"] = "Sėkmingai nusipirkote žaidėją";
+                }else
+                {
+                    Session["error"] = "Jums trūksta pinigu!";
                 }
             }
             else

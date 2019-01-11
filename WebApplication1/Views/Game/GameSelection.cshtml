@@ -4,6 +4,10 @@
 }
 
 <h2>Registracija į turnyrą</h2>
+@if(ViewBag.Error != null)
+{
+    <div class="alert-danger">@ViewBag.Error</div>
+}
 @if (ViewBag.SuccessMessage != null)
 {
     <div class="alert-success">@ViewBag.SuccessMessage</div>
