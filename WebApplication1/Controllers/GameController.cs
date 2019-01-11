@@ -32,7 +32,7 @@ namespace WebApplication1.Controllers
             if (countOfPlayerInTournament == maxNumberOfUsers)
             {
                 TournamentManageController tournament = new TournamentManageController();
-                ViewBag.Error = "Turnyras vyksta. Apie rezultatus bus pranesta zinute";
+                ViewBag.SuccessMessage = "Turnyras vyksta. Apie rezultatus bus pranesta zinute";
             }
             ViewBag.Message = countOfPlayerInTournament;
             var viewTournamentModel = new ViewTournamentModel
