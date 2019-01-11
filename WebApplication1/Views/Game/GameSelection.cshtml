@@ -3,12 +3,12 @@
     Layout = "~/Views/Shared/_LayoutAfterLogin.cshtml";
 }
 
-<div>Jau užsiregistravo @Model.NumberOfUsers dalyvių</div>
+<h2>Registracija į turnyrą</h2>
 <button type="button" onclick="location.href='@Url.Action("RegisterNewCompetotor", "Game")'">Registruotis</button>
 <div class="progress" style="width:20%">
-    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="@Model.PartOfRequiredUsers"
-         aria-valuemin="0" aria-valuemax="100" style="width:@Model.PartOfRequiredUsers%">
-        @Model.PartOfRequiredUsers %
+    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="@Model.PartOfRequiredUsers"
+         aria-valuemin="0" aria-valuemax="8" style="width:@Model.PartOfRequiredUsers%">
+        @Model.NumberOfUsers
     </div>
 </div>
 

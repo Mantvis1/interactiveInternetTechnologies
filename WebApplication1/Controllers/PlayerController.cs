@@ -44,6 +44,10 @@ namespace WebApplication1.Controllers
             }
             else
             {
+                if ((int)Session["currentPage"] <= 0 || (int)Session["currentPage"] > (Convert.ToInt32(Math.Floor(pageCount) + 1)))
+                {
+                    Session["currentPage"] = 1;
+                }
                 int startIndex = ((int)Session["currentPage"] - 1) * numberInPage;
                 if (localPlayers.Count - startIndex < numberInPage)
                 {
@@ -54,8 +58,8 @@ namespace WebApplication1.Controllers
                     showPlayers.AddRange(localPlayers.GetRange(((int)Session["currentPage"] - 1) * numberInPage, numberInPage));
                 }
                 page = new PagingModel(current: (int)Session["currentPage"], last: (Convert.ToInt32(Math.Floor(pageCount) + 1)));
+                
             }
-            Session["currentPage"] = null;
             var MarketViewModel = new PagedViewModel
             {
                 Players = showPlayers,
@@ -71,6 +75,7 @@ namespace WebApplication1.Controllers
             {
                 return RedirectToAction("LogIn", "Account");
             }
+            Session["currentPage"] = null;
             if (Session["error"] != null)
             {
                 ViewBag.Error = Session["error"];
@@ -90,7 +95,6 @@ namespace WebApplication1.Controllers
             return View(players);
         }
 
-        // jokiu budu nedet private, 3 valandas aiskinausi kodel neranda o čia todėl kad įdėjau "private ActionResult BuyPlayer()"
         [HttpPost]
         public ActionResult BuyPlayer(int playerId, int cost)
         {
@@ -145,6 +149,15 @@ namespace WebApplication1.Controllers
             if (pageNumber != null)
             {
                 Session["currentPage"] = Convert.ToInt32(pageNumber);
+            }
+            return RedirectToAction("Market");
+        }
+
+        public ActionResult ChangePageUsingInput(int? getCurrentPageNumber)
+        {
+            if (getCurrentPageNumber != null)
+            {
+                Session["currentPage"] = Convert.ToInt32(getCurrentPageNumber);
             }
             return RedirectToAction("Market");
         }

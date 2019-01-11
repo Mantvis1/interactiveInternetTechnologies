@@ -33,9 +33,21 @@ textarea {
 }
 
 costColor {
-     color: white;
+    color: white;
 }
 
-tr td { background-color: white }
-tr:hover td { background-color: lightgreen }
+tr td {
+    background-color: white;
+}
 
+tr:hover td {
+    background-color: lightgreen;
+}
+
+th {
+    width: 20%;
+}
+
+.width40{
+    width:70%;
+}

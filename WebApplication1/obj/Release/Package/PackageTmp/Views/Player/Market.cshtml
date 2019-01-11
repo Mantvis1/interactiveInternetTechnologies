@@ -11,7 +11,7 @@ else if (ViewBag.SuccessMessage != null)
     <div class="alert-success">@ViewBag.Error</div>
 }
 
-<table class="invisibleTableBorders">
+<table class="invisibleTableBorders width40">
     <tr>
         <th>Vardas Pavarde</th>
         <th>Kaina</th>
@@ -32,22 +32,28 @@ else if (ViewBag.SuccessMessage != null)
         </tr>
     }
 </table>
-<form method="post" action="/Player/ChangePage">
-    <h3>
-        <button name="pageNumber" type="submit" value="@Model.Page.FirstPage">@Model.Page.FirstPage</button>
-        ...
-        @if (Model.Page.BeforePage != 0)
+<div>
+    <form action="/Player/ChangePageUsingInput" method="post">
+        <input name="getCurrentPageNumber" />
+        <button class="btn btn-info" type="submit">Pereiti</button>
+    </form>
+    <form method="post" action="/Player/ChangePage">
+        <h3>
+            <button name="pageNumber" type="submit" value="@Model.Page.FirstPage">@Model.Page.FirstPage</button>
+            ...
+            @if (Model.Page.BeforePage != 0)
             {
-            <button name="pageNumber" type="submit" value="@Model.Page.BeforePage">@Model.Page.BeforePage</button>
-        }
+                <button name="pageNumber" type="submit" value="@Model.Page.BeforePage">@Model.Page.BeforePage</button>
+            }
 
-        <button name="pageNumber" type="submit" value="@Model.Page.CurrentPage"><b>@Model.Page.CurrentPage</b></button>
+            <button name="pageNumber" type="submit" value="@Model.Page.CurrentPage"><b>@Model.Page.CurrentPage</b></button>
 
-        @if (Model.Page.NextPage < Model.Page.LastPage)
+            @if (Model.Page.NextPage < Model.Page.LastPage)
             {
-            <button name="pageNumber" type="submit" value="@Model.Page.NextPage">@Model.Page.NextPage</button>
-        }
-        ...
-        <button name="pageNumber" type="submit" value="@Model.Page.LastPage">@Model.Page.LastPage</button>
-    </h3>
-</form>
+                <button name="pageNumber" type="submit" value="@Model.Page.NextPage">@Model.Page.NextPage</button>
+            }
+            ...
+            <button name="pageNumber" type="submit" value="@Model.Page.LastPage">@Model.Page.LastPage</button>
+        </h3>
+    </form>
+</div>

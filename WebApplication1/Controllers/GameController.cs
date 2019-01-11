@@ -14,6 +14,7 @@ namespace WebApplication1.Controllers
         private MessageDB mDB = new MessageDB();
         private int maxNumberOfUsers = 8;
 
+
         [HttpGet]
         public ActionResult GameSelection()
         {
@@ -21,6 +22,7 @@ namespace WebApplication1.Controllers
             {
                 return RedirectToAction("About", "Home");
             }
+            Session["currentPage"] = null;
             int countOfPlayerInTournament = game.CountOfTournamentPlayer();
             if (Session["error"] != null)
             {
@@ -62,6 +64,7 @@ namespace WebApplication1.Controllers
             {
                 return RedirectToAction("About", "Home");
             }
+            Session["currentPage"] = null;
             List<RankingModel> listOfRanks = ranking.getAllRankings();
             return View(listOfRanks);
         }
@@ -70,6 +73,7 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult Messages()
         {
+            Session["currentPage"] = null;
             if (Session["id"] == null)
             {
                 return RedirectToAction("LogIn", "Account");
