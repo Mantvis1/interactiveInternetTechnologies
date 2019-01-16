@@ -131,22 +131,31 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult SellPlayer(int playerId)
         {
-            bool isDeleted = uDB.DeletePlayerById(playerId, (int)Session["id"]);
-            if (isDeleted == true)
+            bool isRegistratedOnTournament = uDB.IsTournamentMember((int)Session["id"]);
+            int count = uDB.getUserPlayerIdList((int)Session["id"]).Count;
+            if (isRegistratedOnTournament == false || (isRegistratedOnTournament == true && count > 1))
             {
-                PlayerViewModel player = new PlayerViewModel(playerId, "", 0, pDB.getEffById(playerId));
-                int money = uDB.getMoneyById((int)Session["id"]);
-                int cost = (int)Math.Round(player.getCost(1), 0);
-                int moneyLeft = money + cost;
-                uDB.updateUserMoney((int)Session["id"], (Convert.ToInt32(moneyLeft)));
-                Session["money"] = moneyLeft;
-                mDB.addNewMessage((int)Session["id"], 2, cost);
-                teamCost.GetTeamCost((int)Session["id"]);
-                Session["success"] = "Sėkmingai pardavėte žaidėją";
+                bool isDeleted = uDB.DeletePlayerById(playerId, (int)Session["id"]);
+                if (isDeleted == true)
+                {
+                    PlayerViewModel player = new PlayerViewModel(playerId, "", 0, pDB.getEffById(playerId));
+                    int money = uDB.getMoneyById((int)Session["id"]);
+                    int cost = (int)Math.Round(player.getCost(1), 0);
+                    int moneyLeft = money + cost;
+                    uDB.updateUserMoney((int)Session["id"], (Convert.ToInt32(moneyLeft)));
+                    Session["money"] = moneyLeft;
+                    mDB.addNewMessage((int)Session["id"], 2, cost);
+                    teamCost.GetTeamCost((int)Session["id"]);
+                    Session["success"] = "Sėkmingai pardavėte žaidėją";
+                }
+                else
+                {
+                    Session["error"] = "Klaida parduodant žaidėją";
+                }
             }
             else
             {
-                Session["error"] = "Klaida parduodant žaidėją";
+                Session["error"] = "Negalite parduoti paskutinio žaidėjo kadangi dalyvaujate turnyre!";
             }
             return RedirectToAction("MyTeam");
         }

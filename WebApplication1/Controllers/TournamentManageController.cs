@@ -16,7 +16,8 @@ namespace WebApplication1.Controllers
 
         public TournamentManageController()
         {
-            Task.Run(() => execute());
+            execute();
+            //Task.Run(() => execute());
         }
 
         private void execute()
@@ -81,7 +82,9 @@ namespace WebApplication1.Controllers
 
             UpdateUserWonAndLostTable(top4, last4);
             clearTournamentTable();
+
         }
+
 
         private void SendMessagesAndAddPrizes(List<Tuple<int, int>> top4, int prize)
         {
@@ -120,22 +123,22 @@ namespace WebApplication1.Controllers
                 }
             }
 
-            for (int i = 0; i < top4.Count; i++)
+            for (int i = 0; i < last4.Count; i++)
             {
                 if (i == 0)
                 {
-                    RankingModel rank = rDB.getUserRankinsById(top4[i].Item1);
-                    rDB.updateRankings(top4[i].Item1, rank.Win + 2, rank.Lose + 1);
+                    RankingModel rank = rDB.getUserRankinsById(last4[i].Item1);
+                    rDB.updateRankings(last4[i].Item1, rank.Win + 2, rank.Lose + 1);
                 }
                 else if (i == 1 || i == 2)
                 {
-                    RankingModel rank = rDB.getUserRankinsById(top4[i].Item1);
-                    rDB.updateRankings(top4[i].Item1, rank.Win + 1, rank.Lose + 2);
+                    RankingModel rank = rDB.getUserRankinsById(last4[i].Item1);
+                    rDB.updateRankings(last4[i].Item1, rank.Win + 1, rank.Lose + 2);
                 }
                 else if (i == 3)
                 {
-                    RankingModel rank = rDB.getUserRankinsById(top4[i].Item1);
-                    rDB.updateRankings(top4[i].Item1, rank.Win, rank.Lose + 3);
+                    RankingModel rank = rDB.getUserRankinsById(last4[i].Item1);
+                    rDB.updateRankings(last4[i].Item1, rank.Win, rank.Lose + 3);
                 }
             }
         }

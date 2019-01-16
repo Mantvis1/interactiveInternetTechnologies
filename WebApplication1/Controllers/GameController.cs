@@ -24,15 +24,22 @@ namespace WebApplication1.Controllers
             }
             Session["currentPage"] = null;
             int countOfPlayerInTournament = game.CountOfTournamentPlayer();
-            if (Session["error"] != null)
+            if (uDB.getUserPlayerIdList((int)Session["id"]) != null)
             {
-                ViewBag.Error = Session["error"];
-                Session["error"] = null;
+                if (Session["error"] != null)
+                {
+                    ViewBag.Error = Session["error"];
+                    Session["error"] = null;
+                }
+                if (countOfPlayerInTournament == maxNumberOfUsers)
+                {
+                    TournamentManageController tournament = new TournamentManageController();
+                    ViewBag.SuccessMessage = "Turnyras vyksta. Apie rezultatus bus pranesta zinute";
+                }
             }
-            if (countOfPlayerInTournament == maxNumberOfUsers)
+            else
             {
-                TournamentManageController tournament = new TournamentManageController();
-                ViewBag.SuccessMessage = "Turnyras vyksta. Apie rezultatus bus pranesta zinute";
+                ViewBag.Error = "Jus neturite nei vieno žaidėjo!";
             }
             ViewBag.Message = countOfPlayerInTournament;
             var viewTournamentModel = new ViewTournamentModel

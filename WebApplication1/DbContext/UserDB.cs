@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 using WebApplication1.Models;
+using System;
 
 namespace WebApplication1.DbContext
 {
@@ -33,7 +34,7 @@ namespace WebApplication1.DbContext
                 if (count == 0)
                 {
                     databaseConnection.Open();
-                    query = "INSERT INTO user (id, Name, Password, Email,Money) VALUES (NULL, '" + user.UserName + "', '" + user.Password + "', '" + user.Email + "',500);";
+                    query = "INSERT INTO user (id, Name, Password, Email,Money) VALUES (NULL, '" + user.UserName + "', '" + user.Password + "', '" + user.Email + "',3000);";
                     commandDatabase = new MySqlCommand(query, databaseConnection);
 
                     reader = commandDatabase.ExecuteReader();
@@ -136,6 +137,28 @@ namespace WebApplication1.DbContext
             databaseConnection.Close();
             return Player;
         }
+
+        public bool IsTournamentMember(int id)
+        {
+            bool isRegistrated = false;
+            databaseConnection.Open();
+            query = "Select count(id) from tournament where userId=" + id;
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            MySqlDataReader reader = commandDatabase.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    if (reader.GetInt32(0) != 0)
+                    {
+                        isRegistrated = true;
+                    }
+                }
+            }
+            databaseConnection.Close();
+            return isRegistrated;
+        }
+
         public bool DeletePlayerById(int playerId, int userId)
         {
             if (playerId >= 0 && userId >= 0)
