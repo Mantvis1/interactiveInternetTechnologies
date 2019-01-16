@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using WebApplication1.Controllers;
 using WebApplication1.DbContext;
 using WebApplication1.Models;
+using System.Linq;
 
 namespace WebApplication1.Repository
 {
@@ -13,7 +14,7 @@ namespace WebApplication1.Repository
 
         public PlayerRepository()
         {
-            players = getUpdatedListOfPlayers();
+            players = sortList(getUpdatedListOfPlayers());
         }
 
         public List<PlayerViewModel> GetAll()
@@ -42,6 +43,12 @@ namespace WebApplication1.Repository
         public List<PlayerViewModel> getPartOfPlayers(int start, int count)
         {
             return players.GetRange(start, count);
+        }
+
+        private List<PlayerViewModel> sortList(List<PlayerViewModel> updated)
+        {
+            List<PlayerViewModel> sortedList = updated.OrderByDescending(x => x.Eff).ToList();
+            return sortedList;
         }
     }
 }
