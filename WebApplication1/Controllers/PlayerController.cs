@@ -33,32 +33,36 @@ namespace WebApplication1.Controllers
                 ViewBag.SuccessMessage = Session["success"];
                 Session["success"] = null;
             }
-            List<PlayerViewModel> localPlayers = pR.GetAll();
+
             List<PlayerViewModel> showPlayers = new List<PlayerViewModel>();
-            double pageCount = localPlayers.Count / numberInPage;
+
+            double pageCount = pR.getLength() / numberInPage;
+            int lastPage = (Convert.ToInt32(Math.Floor(pageCount) + 1));
+
             PagingModel page = new PagingModel();
             if (Session["currentPage"] == null)
             {
-                showPlayers.AddRange(localPlayers.GetRange(0, numberInPage));
-                page = new PagingModel(current: 1, last: (Convert.ToInt32(Math.Floor(pageCount) + 1)));
+                showPlayers.AddRange(pR.getPartOfPlayers(0, numberInPage));
+                page = new PagingModel(current: 1, last: lastPage);
             }
             else
             {
-                if ((int)Session["currentPage"] <= 0 || (int)Session["currentPage"] > (Convert.ToInt32(Math.Floor(pageCount) + 1)))
+                if ((int)Session["currentPage"] <= 0 || (int)Session["currentPage"] > lastPage)
                 {
-                    Session["currentPage"] = 1;
+                    Session["currentPage"] = lastPage;
                 }
+
                 int startIndex = ((int)Session["currentPage"] - 1) * numberInPage;
-                if (localPlayers.Count - startIndex < numberInPage)
+                if (pR.getLength() - startIndex < numberInPage)
                 {
-                    showPlayers.AddRange(localPlayers.GetRange(((int)Session["currentPage"] - 1) * numberInPage, localPlayers.Count - startIndex));
+                    showPlayers.AddRange(pR.getPartOfPlayers(((int)Session["currentPage"] - 1) * numberInPage, pR.getLength() - startIndex));
                 }
                 else
                 {
-                    showPlayers.AddRange(localPlayers.GetRange(((int)Session["currentPage"] - 1) * numberInPage, numberInPage));
+                    showPlayers.AddRange(pR.getPartOfPlayers(((int)Session["currentPage"] - 1) * numberInPage, numberInPage));
                 }
-                page = new PagingModel(current: (int)Session["currentPage"], last: (Convert.ToInt32(Math.Floor(pageCount) + 1)));
-                
+                page = new PagingModel(current: (int)Session["currentPage"], last: lastPage);
+
             }
             var MarketViewModel = new PagedViewModel
             {
@@ -111,7 +115,8 @@ namespace WebApplication1.Controllers
                     mDB.addNewMessage((int)Session["id"], 1, -cost);
                     teamCost.GetTeamCost((int)Session["id"]);
                     Session["success"] = "Sėkmingai nusipirkote žaidėją";
-                }else
+                }
+                else
                 {
                     Session["error"] = "Jums trūksta pinigu!";
                 }

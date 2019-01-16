@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Text;
 using WebApplication1.Controllers;
 using WebApplication1.Models;
+using WebApplication1.Repository;
 
 namespace WebApplication1.DbContext
 {
     public class PlayerDB : BaseDB
     {
         string query = "";
-        PlayerManagerController manager = new PlayerManagerController();
+        PlayerManagerController pMC = new PlayerManagerController();
+
         public PlayerDB()
         {
 
@@ -73,7 +75,7 @@ namespace WebApplication1.DbContext
                     while (reader.Read())
                     {
                         points += reader.GetInt32(20);
-                        eff += manager.playerEff(points, reader.GetInt32(13), reader.GetInt32(14), reader.GetInt32(16), reader.GetInt32(18), reader.GetInt32(5) - reader.GetInt32(4), reader.GetInt32(9) - reader.GetInt32(8), reader.GetInt32(17));
+                        eff += pMC.playerEff(points, reader.GetInt32(13), reader.GetInt32(14), reader.GetInt32(16), reader.GetInt32(18), reader.GetInt32(5) - reader.GetInt32(4), reader.GetInt32(9) - reader.GetInt32(8), reader.GetInt32(17));
                     }
                     ef.ID = id;
                     ef.Pts = points / limit;
