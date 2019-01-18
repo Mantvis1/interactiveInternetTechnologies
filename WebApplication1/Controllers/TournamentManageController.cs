@@ -16,8 +16,7 @@ namespace WebApplication1.Controllers
 
         public TournamentManageController()
         {
-            execute();
-            //Task.Run(() => execute());
+            Task.Run(() => execute());
         }
 
         private void execute()

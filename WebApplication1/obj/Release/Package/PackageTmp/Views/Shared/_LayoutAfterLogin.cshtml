@@ -34,7 +34,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now</p>
+            <div id="todaysDate"></div>
             <p>
                 <a href="http://jigsaw.w3.org/css-validator/check/referer">
                     <img style="border:0;width:88px;height:31px"
@@ -44,7 +44,29 @@
             </p>
         </footer>
     </div>
-
+    <script type="text/javascript">
+        function doDate() {
+            var now = new Date();
+            if (now.getHours() < 10) {
+                var hours = "0" + now.getHours();
+            } else {
+                var hours = now.getHours();
+            }
+            if (now.getMinutes() < 10) {
+                var minutes = "0" + now.getMinutes();
+            } else {
+                var minutes = now.getMinutes();
+            }
+            if (now.getSeconds() < 10) {
+                var seconds = "0" + now.getSeconds();
+            } else {
+                var seconds = now.getSeconds();
+            }
+            var str = "Dabar yra: " + hours + ":" + minutes + ":" + seconds;
+            document.getElementById("todaysDate").innerHTML = str;
+        }
+        setInterval(doDate, 1000);
+    </script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

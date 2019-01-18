@@ -71,6 +71,7 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Settings");
         }
 
+     //   [HttpDelete]
         public ActionResult DeleteAccount(string password)
         {
             if (mDB.isUserExists((int)Session["id"], password) == true)
